@@ -9,7 +9,7 @@
                         foreach ($category as $item) {
                             ?>
                             <div class="item">
-                                <a href="<?= site_url("product/category/{$item->id}") ?>" class="header"><?= $item->name ?></a>
+                                <a href="<?= site_url("product/category/{$item->category_id}") ?>" class="header"><?= $item->category_name ?></a>
                             </div>
                             <?php
                         }
@@ -33,13 +33,13 @@
                                     ?>
                                     <div class="column">
                                         <div class="ui card">
-                                            <a class="image" href="<?= site_url("product/view/{$item->id}") ?>">
-                                                <img src="<?= base_url("images/{$item->imgDir}/{$item->thumbnail}") ?>">
+                                            <a class="image" href="<?= site_url("product/view/{$item->product_id}") ?>">
+                                                <img src="<?= base_url("images/{$item->product_imgDir}/{$item->product_thumbnail}") ?>">
                                             </a>
                                             <div class="content">
-                                                <a class="header" href="<?= site_url("product/view/{$item->id}") ?>"><?= $item->name ?></a>
+                                                <a class="header" href="<?= site_url("product/view/{$item->product_id}") ?>"><?= $item->product_name ?></a>
                                                 <div class="meta">
-                                                    <a><?= $item->description ?></a>
+                                                    <a><?= $item->product_description ?></a>
                                                 </div>
                                             </div>
                                         </div>
@@ -177,13 +177,13 @@
                                 <label>
                                     Username
                                 </label>
-                                <input type="text" name="username" />
+                                <input type="text" name="member_username" />
                             </div>
                             <div class="field">
                                 <label>
                                     Password
                                 </label>
-                                <input type="password" name="password" />
+                                <input type="password" name="member_password" />
                             </div>
                             <div class="field">
                                 <button type="submit" class="ui raised button primary">เข้าสู่ระบบ</button>
@@ -194,7 +194,7 @@
                     } else {
                         ?>
                         <div>
-                            <h3 class="ui header">ยินดีต้อนรับ คุณ<?= $user->full_name ?></h3>
+                            <h3 class="ui header">ยินดีต้อนรับ คุณ<?= $user->member_full_name ?></h3>
                             <a href="<?= site_url("member/profile") ?>" class="ui disabled fluid button" style="margin-bottom: 5px;">แก้ไขโพรไฟล์</a>
                             <a href="<?= site_url("member/myorder") ?>" class="ui disabled fluid button" style="margin-bottom: 5px;">รายการสั่งซื้อ</a>
                             <a href="<?= site_url("member/signout") ?>" class="ui fluid button">ออกจากระบบ</a>

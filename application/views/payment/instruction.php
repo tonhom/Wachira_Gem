@@ -9,7 +9,7 @@
                         foreach ($category as $item) {
                             ?>
                             <div class="item">
-                                <a href="<?= site_url("product/category/{$item->id}") ?>" class="header"><?= $item->name ?></a>
+                                <a href="<?= site_url("product/category/{$item->category_id}") ?>" class="header"><?= $item->category_name ?></a>
                             </div>
                             <?php
                         }

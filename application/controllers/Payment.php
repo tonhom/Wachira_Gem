@@ -24,15 +24,15 @@ class Payment extends MY_Controller {
         $data = $this->input->post();
 
         $model["order_number"] = $data["order_number"];
-        $model["full_name"] = $data["full_name"];
-        $model["email"] = $data["email"];
-        $model["phone"] = $data["phone"];
-        $model["bank"] = $data["bank"];
-        $model["branch"] = $data["branch"];
-        $model["amount"] = $data["amount"];
-        $model["remark"] = $data["remark"];
-        $model["time_transfer"] = $data["time_transfer"];
-        $model["date_transfer"] = "{$data["paid_year"]}-{$data["paid_month"]}-{$data["paid_date"]}";
+        $model["payment_full_name"] = $data["payment_full_name"];
+        $model["payment_email"] = $data["payment_email"];
+        $model["payment_phone"] = $data["payment_phone"];
+        $model["payment_bank"] = $data["payment_bank"];
+        $model["payment_branch"] = $data["payment_branch"];
+        $model["payment_amount"] = $data["payment_amount"];
+        $model["payment_remark"] = $data["payment_remark"];
+        $model["payment_time_transfer"] = $data["payment_time_transfer"];
+        $model["payment_date_transfer"] = "{$data["paid_year"]}-{$data["paid_month"]}-{$data["paid_date"]}";
 
         $this->load->model("PaymentModel");
         $this->db->trans_begin();

@@ -10,20 +10,20 @@ if (!isset($info)) {
     <div class="ui segments">
         <div class="ui <?= $isEdit ? "inverted green" : "" ?> segment">
             <h3 class="ui header">
-                <?= ($isEdit ? "แก้ไขข้อมูลินค้า : {$info->name}" : "เพิ่มสินค้า") ?>
+                <?= ($isEdit ? "แก้ไขข้อมูลินค้า : {$info->product_name}" : "เพิ่มสินค้า") ?>
             </h3>
         </div>
         <div class="ui segment">
             <form class="ui form" action="<?= site_url("staff/product/save") ?>" method="post">
-                <input type="hidden" name="id" value="<?= getValDefault($info, "id") ?>" />
+                <input type="hidden" name="product_id" value="<?= getValDefault($info, "product_id") ?>" />
                 <div class="two field fields">
                     <div class="field">
                         <label>ชื่อสินค้า</label>
-                        <input type="text" name="name" placeholder="" required="" value="<?= getValDefault($info, "name") ?>" />
+                        <input type="text" name="product_name" placeholder="" required="" value="<?= getValDefault($info, "product_name") ?>" />
                     </div>
                     <div class="field">
                         <label>คำอธิบายสั้นๆ</label>
-                        <input type="text" name="description" placeholder="" required="" value="<?= getValDefault($info, "description") ?>" />
+                        <input type="text" name="product_description" placeholder="" required="" value="<?= getValDefault($info, "product_description") ?>" />
                     </div>
                 </div>
 
@@ -39,7 +39,7 @@ if (!isset($info)) {
                                 $cat = getValDefault($info, "category_id");
                                 foreach ($category as $item) {
                                     ?>
-                                    <div class="item" data-value="<?= $item->id ?>"><?= $item->name ?></div>
+                                    <div class="item" data-value="<?= $item->category_id ?>"><?= $item->category_name ?></div>
                                     <?php
                                 }
                                 ?>
@@ -48,17 +48,17 @@ if (!isset($info)) {
                     </div>
                     <div class="field">
                         <label>ราคาต่อชิ้น</label>
-                        <input type="text" name="price" placeholder="" required="" value="<?= getValDefault($info, "price") ?>" />
+                        <input type="text" name="product_price" placeholder="" required="" value="<?= getValDefault($info, "product_price") ?>" />
                     </div>
                 </div>
                 <div class="two field fields">
                     <div class="field">
                         <label>ชื่ออัลบั้ม</label>
-                        <input type="text" name="imgDir" placeholder="" required="" value="<?= getValDefault($info, "imgDir") ?>" />
+                        <input type="text" name="product_imgDir" placeholder="" required="" value="<?= getValDefault($info, "product_imgDir") ?>" />
                     </div>
                     <div class="field">
                         <label>ไฟล์รูป Thumbnail</label>
-                        <input type="text" name="thumbnail" placeholder="" required="" value="<?= getValDefault($info, "thumbnail") ?>" />
+                        <input type="text" name="product_thumbnail" placeholder="" required="" value="<?= getValDefault($info, "product_thumbnail") ?>" />
                     </div>
                 </div>
                 <button type="submit" class="ui primary button">บันทึกข้อมูล</button>

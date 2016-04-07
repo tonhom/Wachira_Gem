@@ -1,12 +1,12 @@
 <?php
 
 class Member extends MY_Controller {
-    
-    public function myorder(){
+
+    public function myorder() {
         
     }
-    
-    public function profile(){
+
+    public function profile() {
         
     }
 
@@ -23,7 +23,7 @@ class Member extends MY_Controller {
     public function signupProcess() {
         $this->load->model("MemberModel");
         $data = $this->input->post();
-        $data["birthday"] = $data["year"] . "-" . $data["month"] . "-" . $data["date"];
+        $data["member_birthday"] = $data["year"] . "-" . $data["month"] . "-" . $data["date"];
         unset($data["year"]);
         unset($data["month"]);
         unset($data["date"]);
@@ -50,10 +50,15 @@ class Member extends MY_Controller {
     public function signin() {
         $this->load->model("MemberModel");
         $data = $this->input->post();
-        $user = $this->MemberModel->Identity($data["username"], $data["password"]);
+        $user = $this->MemberModel->Identity($data["member_username"], $data["member_password"]);
         if ($user != false) {
             $this->session->set_userdata("user", $user);
-            redirect("home/");
+            if ($this->session->userdata("force_to_cart_after_signin") == "") {
+                redirect("home/");
+            } else {
+                $this->session->unset_userdata("force_to_cart_after_signin");
+                redirect("cart/orderDetail");
+            }
         } else {
             $this->session->set_flashdata("login_error", true);
             redirect("home/");

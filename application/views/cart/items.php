@@ -9,7 +9,7 @@
                         foreach ($category as $item) {
                             ?>
                             <div class="item">
-                                <a href="<?= site_url("product/category/{$item->id}") ?>" class="header"><?= $item->name ?></a>
+                                <a href="<?= site_url("product/category/{$item->category_id}") ?>" class="header"><?= $item->category_name ?></a>
                             </div>
                             <?php
                         }
@@ -99,7 +99,7 @@
                                     ?>
                                     <tr>
                                         <td>
-                                            <a href="<?= site_url("product/view/{$id}") ?>"><?= $info->name ?></a>
+                                            <a href="<?= site_url("product/view/{$id}") ?>"><?= $info->product_name ?></a>
                                         </td>
                                         <td>
                                             <div class="ui fluid action input">
@@ -123,7 +123,7 @@
                     </div>
                     <div class="ui center aligned segment">
                         <a href="<?= site_url("product/") ?>" class="ui button">เลือกสินค้าต่อ</a>
-                        <a href="<?= site_url("cart/update") ?>" class="ui green button">คำนวณใหม่</a>
+                        <!--<a href="<?= site_url("cart/update") ?>" class="ui green button">คำนวณใหม่</a>-->
                         <a href="<?= site_url("cart/orderDetail") ?>" class="ui primary button">ขั้นตอนต่อไป</a>
                     </div>
                 </div>

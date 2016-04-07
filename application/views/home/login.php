@@ -9,7 +9,7 @@
                         foreach ($category as $item) {
                             ?>
                             <div class="item">
-                                <a href="<?= site_url("product/category/{$item->id}") ?>" class="header"><?= $item->name ?></a>
+                                <a href="<?= site_url("product/category/{$item->category_id}") ?>" class="header"><?= $item->category_name ?></a>
                             </div>
                             <?php
                         }
@@ -26,13 +26,13 @@
                                 <label>
                                     Username
                                 </label>
-                                <input type="text" name="username" />
+                                <input type="text" name="member_username" />
                             </div>
                             <div class="field">
                                 <label>
                                     Password
                                 </label>
-                                <input type="password" name="password" />
+                                <input type="password" name="member_password" />
                             </div>
                             <div class="field">
                                 <button type="submit" class="ui raised button primary">เข้าสู่ระบบ</button>

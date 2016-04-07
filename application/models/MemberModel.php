@@ -3,13 +3,13 @@
 class MemberModel extends CI_Model {
 
     public function GetMemberInfo($id) {
-        $this->db->where("id", $id);
+        $this->db->where("member_id", $id);
         $query = $this->db->get("member");
         return $query->row();
     }
 
     public function insert($data) {
-        $check = $this->checkExistUsername($data["username"]);
+        $check = $this->checkExistUsername($data["member_username"]);
         if ($check == false) {
             $this->db->insert("member", $data);
             return true;
@@ -21,7 +21,7 @@ class MemberModel extends CI_Model {
     public function checkExistUsername($username) {
         $this->db->select("*");
         $this->db->from("member");
-        $this->db->where("member.username", $username);
+        $this->db->where("member.member_username", $username);
         $query = $this->db->get();
         if ($query->num_rows() == 0) {
             return false;
@@ -33,8 +33,8 @@ class MemberModel extends CI_Model {
     public function Identity($username, $password) {
         $this->db->select("*");
         $this->db->from("member");
-        $this->db->where("member.username", $username);
-        $this->db->where("member.password", $password);
+        $this->db->where("member.member_username", $username);
+        $this->db->where("member.member_password", $password);
         $query = $this->db->get();
         if ($query->num_rows() == 0) {
             return false;

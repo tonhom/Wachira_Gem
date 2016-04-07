@@ -10,7 +10,7 @@ class Cart extends MY_Controller {
         $data["instantProduct"] = $this->ProductModel;
 
         $this->setNavbar("", ["current" => "cart"]);
-        $data["items"] = $this->session->userdata("order_items");
+        $data["items"] = $this->session->userdata("order_items") == "" ? [] : $this->session->userdata("order_items");
         $this->render($this->loadView("cart/items", $data));
     }
 
@@ -47,15 +47,16 @@ class Cart extends MY_Controller {
     public function confirmOrder() {
         $user = $this->session->userdata("user");
         if ($user == "") {
+            $this->session->set_userdata("force_to_cart_after_signin", TRUE);
             redirect("home/login");
         } else {
             // first create order
             $this->load->model("OrderModel");
             $dataOrder = [
                 "order_number" => $this->generateOrderNumber(),
-                "member_id" => $this->session->userdata("user")->id,
-                "date_order" => date("Y-m-d H:i:s"),
-                "total_price" => $this->calculateTotalPrice()
+                "member_id" => $this->session->userdata("user")->member_id,
+                "order_date_order" => date("Y-m-d H:i:s"),
+                "order_total_price" => $this->calculateTotalPrice()
             ];
 
             $this->db->trans_begin();
@@ -65,7 +66,7 @@ class Cart extends MY_Controller {
                 $dataOrderRow = [
                     "order_id" => $order_id,
                     "product_id" => $id,
-                    "amount" => $amount
+                    "order_detail_amount" => $amount
                 ];
                 $this->OrderModel->InsertRow($dataOrderRow);
             }
@@ -87,7 +88,7 @@ class Cart extends MY_Controller {
         $totalPrice = 0;
         foreach ($data as $id => $amount) {
             $detail = $this->ProductModel->GetById($id);
-            $totalPrice += $detail->price * $amount;
+            $totalPrice += $detail->product_price * $amount;
         }
         return $totalPrice;
     }

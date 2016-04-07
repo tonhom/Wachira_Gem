@@ -9,7 +9,7 @@
                         foreach ($category as $item) {
                             ?>
                             <div class="item">
-                                <a href="<?= site_url("product/category/{$item->id}") ?>" class="header"><?= $item->name ?></a>
+                                <a href="<?= site_url("product/category/{$item->category_id}") ?>" class="header"><?= $item->category_name ?></a>
                             </div>
                             <?php
                         }
@@ -31,7 +31,7 @@
                                     </div>
                                     <div class="nine wide column">
                                         <div class="field">
-                                            <input type="text" name="full_name" required="" />
+                                            <input type="text" name="member_full_name" required="" />
                                         </div>
                                     </div>
                                     <div class="three wide column"></div>
@@ -94,7 +94,7 @@
                                     </div>
                                     <div class="nine wide column">
                                         <div class="field">
-                                            <input type="text" name="gender" />
+                                            <input type="text" name="member_gender" />
                                         </div>
                                     </div>
                                     <div class="three wide column"></div>
@@ -105,7 +105,7 @@
                                     </div>
                                     <div class="nine wide column">
                                         <div class="field">
-                                            <textarea name="address"></textarea>
+                                            <textarea name="member_address"></textarea>
                                         </div>
                                     </div>
                                     <div class="three wide column"></div>
@@ -116,7 +116,7 @@
                                     </div>
                                     <div class="nine wide column">
                                         <div class="field">
-                                            <input type="text" name="tel" required="" />
+                                            <input type="text" name="member_tel" required="" />
                                         </div>
                                     </div>
                                     <div class="three wide column"></div>
@@ -128,7 +128,7 @@
                                     </div>
                                     <div class="nine wide column">
                                         <div class="field">
-                                            <input type="text" name="username" required="" />
+                                            <input type="text" name="member_username" required="" />
                                         </div>
                                     </div>
                                     <div class="three wide column"></div>
@@ -139,7 +139,7 @@
                                     </div>
                                     <div class="nine wide column">
                                         <div class="field">
-                                            <input type="password" name="password" required="" />
+                                            <input type="password" name="member_password" required="" />
                                         </div>
                                     </div>
                                     <div class="three wide column"></div>
@@ -150,7 +150,7 @@
                                     </div>
                                     <div class="nine wide column">
                                         <div class="field">
-                                            <input type="email" name="email" required="" />
+                                            <input type="email" name="member_email" required="" />
                                         </div>
                                     </div>
                                     <div class="three wide column"></div>

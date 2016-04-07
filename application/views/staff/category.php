@@ -8,7 +8,7 @@ if (!isset($dataEdit)) {
 ?>
 <div class="ui container" style="margin-top: 58px;">
     <form class="ui form" action="<?= site_url("staff/category/save") ?>" method="post">
-        <input type="hidden" name="id" value="<?= getValDefault($dataEdit, "id") ?>" />
+        <input type="hidden" name="category_id" value="<?= getValDefault($dataEdit, "category_id") ?>" />
         <div class="ui segments">
             <div class="ui <?=$isEdit? "green inverted" : ""?> segment">
                 <?php
@@ -27,7 +27,7 @@ if (!isset($dataEdit)) {
                 <div class="column">
                     <div class="field">
                         <label>ชื่อประเภทสินค้า</label>
-                        <input type="text" name="name" placeholder="กรุณาระบุชื่อประเภทสินค้า" value="<?= getValDefault($dataEdit, "name") ?>" required="" />
+                        <input type="text" name="category_name" placeholder="กรุณาระบุชื่อประเภทสินค้า" value="<?= getValDefault($dataEdit, "category_name") ?>" required="" />
                         <br /><br />
                         <button type="submit" class="ui primary button">บันทึก</button>
                         <a href="<?= site_url("staff/category/") ?>" class="ui button">ยกเลิก</a>
@@ -54,18 +54,18 @@ if (!isset($dataEdit)) {
                 ?>
                 <tr>
                     <td style="text-align: center;"><?= $count++ ?></td>
-                    <td><?= $item->name ?></td>
+                    <td><?= $item->category_name ?></td>
                     <td style="text-align: left;">
                         <div class="ui buttons">
-                            <a href="<?= site_url("staff/category/edit/{$item->id}") ?>" class="ui button primary">แก้ไข</a>
+                            <a href="<?= site_url("staff/category/edit/{$item->category_id}") ?>" class="ui button primary">แก้ไข</a>
                             <?php
-                            if ($model->InUse($item->id)) {
+                            if ($model->InUse($item->category_id)) {
                                 ?>
                                 <a href="javascript:;" class="ui disabled orange button">ลบ</a>
                                 <?php
                             } else {
                                 ?>
-                                <a href="<?= site_url("staff/category/remove/{$item->id}") ?>" class="ui orange button">ลบ</a>
+                                <a href="<?= site_url("staff/category/remove/{$item->category_id}") ?>" class="ui orange button">ลบ</a>
                                 <?php
                             }
                             ?>

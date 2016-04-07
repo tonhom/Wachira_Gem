@@ -18,7 +18,7 @@ class CategoryModel extends CI_Model {
     }
 
     public function GetData($id) {
-        $this->db->where("id", $id);
+        $this->db->where("category_id", $id);
         $query = $this->db->get("category");
         return $query->row();
     }
@@ -26,13 +26,13 @@ class CategoryModel extends CI_Model {
     public function GetAlToDictionary() {
         $query = $this->db->get("category");
         foreach ($query->result() as $item) {
-            $data[$item->id] = $item->name;
+            $data[$item->category_id] = $item->category_name;
         }
         return $data;
     }
 
     public function Remove($id) {
-        $this->db->where("id", $id);
+        $this->db->where("category_id", $id);
         $this->db->delete("category");
     }
 
@@ -41,7 +41,7 @@ class CategoryModel extends CI_Model {
     }
 
     public function Update($id, $data) {
-        $this->db->where("id", $id);
+        $this->db->where("category_id", $id);
         $this->db->update("category", $data);
     }
 

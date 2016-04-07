@@ -9,7 +9,7 @@
                         foreach ($category as $item) {
                             ?>
                             <div class="item">
-                                <a href="<?= site_url("product/category/{$item->id}") ?>" class="header"><?= $item->name ?></a>
+                                <a href="<?= site_url("product/category/{$item->category_id}") ?>" class="header"><?= $item->category_name ?></a>
                             </div>
                             <?php
                         }
@@ -57,12 +57,12 @@
                                 $totalAll = 0;
                                 foreach ($items as $id => $amount) {
                                     $info = $instantProduct->GetById($id);
-                                    $total = $info->price * $amount;
+                                    $total = $info->product_price * $amount;
                                     $totalAll += $total;
                                     ?>
                                     <tr>
                                         <td>
-                                            <a href="<?= site_url("product/view/{$id}") ?>"><?= $info->name ?></a>
+                                            <a href="<?= site_url("product/view/{$id}") ?>"><?= $info->product_name ?></a>
                                         </td>
                                         <td>
                                             <?= $amount ?> ชิ้น

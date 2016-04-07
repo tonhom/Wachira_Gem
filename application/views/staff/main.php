@@ -28,10 +28,10 @@
                                 ?>
                                 <tr>
                                     <td><?= $count++ ?></td>
-                                    <td><?= $memberInfo->full_name ?></td>
-                                    <td><?= $item->date_order ?></td>
+                                    <td><?= $memberInfo->member_full_name ?></td>
+                                    <td><?= $item->order_date_order ?></td>
                                     <td>
-                                        <a href="<?= site_url("staff/order/detail/{$item->id}") ?>">
+                                        <a href="<?= site_url("staff/order/detail/{$item->order_id}") ?>">
                                             <i class="info icon"></i>
                                         </a>
                                     </td>
@@ -77,10 +77,10 @@
                                 ?>
                                 <tr>
                                     <td><?= $count++ ?></td>
-                                    <td><?= $item->full_name ?></td>
-                                    <td><?= $item->date_transfer ?></td>
+                                    <td><?= $item->payment_full_name ?></td>
+                                    <td><?= $item->payment_date_transfer ?></td>
                                     <td>
-                                        <a href="<?= site_url("staff/payment/detail/{$item->id}") ?>">
+                                        <a href="<?= site_url("staff/payment/detail/{$item->payment_id}") ?>">
                                             <i class="info icon"></i>
                                         </a>
                                     </td>

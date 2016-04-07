@@ -50,14 +50,16 @@ class Product extends MY_Controller {
     public function save() {
         $this->load->model("ProductModel");
         $data = $this->input->post();
-        if ($data["id"] == "") {
+        if ($data["product_id"] == "") {
             // insert
             $id = $this->ProductModel->Insert($data);
+            $this->session->set_flashdata("success", 1);
         } else {
             // save
-            $id = $data["id"];
-            unset($data["id"]);
+            $id = $data["product_id"];
+            unset($data["product_id"]);
             $this->ProductModel->Update($id, $data);
+            $this->session->set_flashdata("success", 2);
         }
         redirect("staff/product/");
     }

@@ -9,7 +9,7 @@
                         foreach ($category as $item) {
                             ?>
                             <div class="item">
-                                <a href="<?= site_url("product/category/{$item->id}") ?>" class="header"><?= $item->name ?></a>
+                                <a href="<?= site_url("product/category/{$item->category_id}") ?>" class="header"><?= $item->category_name ?></a>
                             </div>
                             <?php
                         }
@@ -30,13 +30,13 @@
                                 ?>
                                 <div class="column">
                                     <div class="ui card">
-                                        <a class="image" href="<?= site_url("product/view/{$item->id}") ?>">
-                                            <img src="<?= base_url("images/{$item->imgDir}/{$item->thumbnail}") ?>">
+                                        <a class="image" href="<?= site_url("product/view/{$item->product_id}") ?>">
+                                            <img src="<?= base_url("images/{$item->product_imgDir}/{$item->product_thumbnail}") ?>">
                                         </a>
                                         <div class="content">
-                                            <a class="header" href="<?= site_url("product/view/{$item->id}") ?>"><?= $item->name ?></a>
+                                            <a class="header" href="<?= site_url("product/view/{$item->product_id}") ?>"><?= $item->product_name ?></a>
                                             <div class="meta">
-                                                <a><?= $item->description ?></a>
+                                                <a><?= $item->product_description ?></a>
                                             </div>
                                         </div>
                                     </div>

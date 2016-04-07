@@ -9,7 +9,7 @@
                         foreach ($category as $item) {
                             ?>
                             <div class="item">
-                                <a href="<?= site_url("product/category/{$item->id}") ?>" class="header"><?= $item->name ?></a>
+                                <a href="<?= site_url("product/category/{$item->category_id}") ?>" class="header"><?= $item->category_name ?></a>
                             </div>
                             <?php
                         }
@@ -80,19 +80,19 @@
                                 <div class="ui segment">
                                     <div class="field">
                                         <label>หัวเรื่อง <span style="color: red;">*</span></label>
-                                        <input type="text" name="title" placeholder="" required="" />
+                                        <input type="text" name="contact_title" placeholder="" required="" />
                                     </div>
                                     <div class="field">
                                         <label>ชื่อ - สกุล <span style="color: red;">*</span></label>
-                                        <input type="text" name="full_name" placeholder="" required="" />
+                                        <input type="text" name="contact_full_name" placeholder="" required="" />
                                     </div>
                                     <div class="field">
                                         <label>อีเมล <span style="color: red;">*</span></label>
-                                        <input type="email" name="email" placeholder="" required="" />
+                                        <input type="email" name="contact_email" placeholder="" required="" />
                                     </div>
                                     <div class="field">
                                         <label>รายละเอียด <span style="color: red;">*</span></label>
-                                        <textarea name="detail" required=""></textarea>
+                                        <textarea name="contact_detail" required=""></textarea>
                                     </div>
                                     <div class="field">
                                         <span style="color:red;">หมายเหตุ</span> - กรุณากรอกข้อมูลที่มี  <span style="color: red;">*</span> ทุกช่อง

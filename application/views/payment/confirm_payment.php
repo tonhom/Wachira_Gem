@@ -9,7 +9,7 @@
                         foreach ($category as $item) {
                             ?>
                             <div class="item">
-                                <a href="<?= site_url("product/category/{$item->id}") ?>" class="header"><?= $item->name ?></a>
+                                <a href="<?= site_url("product/category/{$item->category_id}") ?>" class="header"><?= $item->category_name ?></a>
                             </div>
                             <?php
                         }
@@ -62,23 +62,23 @@
                                 </div>
                                 <div class="field">
                                     <label>ชื่อ - สกุล  <span style="color:red;">*</span></label>
-                                    <input type="text" name="full_name" required="" />
+                                    <input type="text" name="payment_full_name" required="" />
                                 </div>
                                 <div class="two fields">
                                     <div class="field">
                                         <label>อีเมล์ <span style="color:red;">*</span></label>
-                                        <input type="email" name="email" required="" />
+                                        <input type="email" name="payment_email" required="" />
                                     </div>
                                     <div class="field">
                                         <label>เบอร์โทรศัพท์ <span style="color:red;">*</span></label>
-                                        <input type="text" name="phone" required="" />
+                                        <input type="text" name="payment_phone" required="" />
                                     </div>
                                 </div>
                                 <div class="two fields">
                                     <div class="field">
                                         <label>ชำระเงินเข้าบัญชี <span style="color:red;">*</span></label>
                                         <div class="ui selection dropdown">
-                                            <input type="hidden" name="bank">
+                                            <input type="hidden" name="payment_bank">
                                             <i class="dropdown icon"></i>
                                             <div class="default text">โปรดเลือกธนาคาร</div>
                                             <div class="menu">
@@ -89,12 +89,12 @@
                                     </div>
                                     <div class="field">
                                         <label>ชำระเงินที่สาขา</label>
-                                        <input type="text" name="branch" />
+                                        <input type="text" name="payment_branch" />
                                     </div>
                                 </div>
                                 <div class="field">
                                     <label>จำนวนเงิน <span style="color:red;">*</span></label>
-                                    <input type="text" name="amount" required="" />
+                                    <input type="text" name="payment_amount" required="" />
                                 </div>
                                 <div class="two fields">
                                     <div class="field">
@@ -146,16 +146,16 @@
                                     </div>
                                     <div class="field">
                                         <label>เวลาโดยประมาณ (รูปแบบ 24)</label>
-                                        <input type="text" name="time_transfer" placeholder="ชั่วโมง:นาที:วินาที" />
+                                        <input type="text" name="payment_time_transfer" placeholder="ชั่วโมง:นาที:วินาที" />
                                     </div>
                                 </div>
                                 <div class="field">
                                     <label>หมายเหตุ</label>
-                                    <input type="text" name="remark" />
+                                    <input type="text" name="payment_remark" />
                                 </div>
                                 <div class="field">
                                     <label>รูปใบสลิป</label>
-                                    <input type="file" name="evidence" />
+                                    <input type="file" name="payment_evidence" />
                                 </div>
                                 <div class="field">
                                     <span style="color:red;">หมายเหตุ</span> - กรุณากรอกข้อมูลที่มี  <span style="color: red;">*</span> ทุกช่อง

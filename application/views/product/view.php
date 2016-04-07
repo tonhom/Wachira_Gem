@@ -8,9 +8,9 @@ $base = $baseArr[$countDir - 1];
 $carts = $this->session->userdata("order_items") == "" ? [] : $this->session->userdata("order_items");
 $default = 1;
 $inCart = false;
-if(isset($carts[$product->id])){
+if(isset($carts[$product->product_id])){
     $inCart = TRUE;
-    $default = $carts[$product->id];
+    $default = $carts[$product->product_id];
 }
 ?>
 <div class="ui container padded1em-top">
@@ -32,17 +32,17 @@ if(isset($carts[$product->id])){
                 ?>
                 <div class="ui card">
                     <div class="content">
-                        <div class="header"><?= $product->name ?></div>
+                        <div class="header"><?= $product->product_name ?></div>
                         <div class="description">
                             ประเภทสินค้า<?= $categoryDict[$product->category_id] ?>
                         </div>
                     </div>
                     <div class="content">
-                        <?= $product->description ?>
+                        <?= $product->product_description ?>
                     </div>
                     <div class="content">
                         <p>
-                            ราคา <strong><?= number_format($product->price) ?> บาท</strong>
+                            ราคา <strong><?= number_format($product->product_price) ?> บาท</strong>
                         </p>
                     </div>
                     <div class="extra content">
@@ -51,7 +51,7 @@ if(isset($carts[$product->id])){
                                 <label>จำนวนสินค้า</label>
                                 <div class="ui fluid action input">
                                     <input type="number" name="amount" value="<?=$default?>" id="amount" min="1" step="1" />
-                                    <a href="<?= site_url("cart/addItem/{$product->id}") ?>" class="ui button primary addToCart">
+                                    <a href="<?= site_url("cart/addItem/{$product->product_id}") ?>" class="ui button primary addToCart">
                                         <i class="add to cart icon"></i> เพิ่มเข้าตะกร้า
                                     </a>
                                 </div>
@@ -67,7 +67,7 @@ if(isset($carts[$product->id])){
                         <h3 class="ui header">ภาพ 360 องศา</h3>
                     </div>
                     <div class="ui segment">
-                        <img src="<?= base_url("images/{$product->imgDir}") ?>/1.JPG" width="100%" height="100%"
+                        <img src="<?= base_url("images/{$product->product_imgDir}") ?>/1.JPG" width="100%" height="100%"
                              class="reel ui fluid image"
                              id="image360Holder" />
                     </div>
@@ -81,7 +81,7 @@ if(isset($carts[$product->id])){
 <script>
     $.reel.def.indicator = 10;
     $('#image360Holder').reel({
-        images: "/<?= $base ?>/images/<?= $product->imgDir ?>/#.JPG",
+        images: "/<?= $base ?>/images/<?= $product->product_imgDir ?>/#.JPG",
         frames: 15,
         loops: true,
         speed: 0.05,

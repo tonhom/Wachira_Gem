@@ -12,20 +12,20 @@ class OrderModel extends CI_Model {
     }
 
     public function GetLastOrder() {
-        $this->db->order_by("date_order", "desc");
+        $this->db->order_by("order_date_order", "desc");
         $this->db->limit(5);
         $query = $this->db->get("order");
         return $query->result();
     }
 
     public function GetMaxId() {
-        $this->db->select_max("id");
+        $this->db->select_max("order_id");
         $query = $this->db->get("order");
         $maxRow = $query->row();
-        if ($maxRow->id == NULL) {
+        if ($maxRow->order_id == NULL) {
             return 0;
         }
-        return $maxRow->id;
+        return $maxRow->order_id;
     }
 
 }
