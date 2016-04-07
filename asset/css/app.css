@@ -1,0 +1,32 @@
+body{
+    /*background-color: #fff2fc;*/
+    background: #ff9999;
+/*    background-color: #323232;*/
+    /*background: rgba(255, 153, 153, 0.8);*/
+}
+#mainNavbar{
+    font-size: 1.2em;
+    margin: 0rem;
+    border-radius: 0px;
+    border-left: none;
+    border-right: none;
+}
+#content-container{
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+.padded1em{
+    padding: 1em;
+}
+
+.padded1em-top{
+    padding-top: 1em;
+}
+.contact-title{
+    padding: 3em;
+    background-color: #ff9999;
+    color: #fff;
+}
+.homepage-slider img{
+    max-height: 300px;
+}

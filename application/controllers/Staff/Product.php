@@ -1,0 +1,65 @@
+<?php
+
+class Product extends MY_Controller {
+
+    public function __construct() {
+        parent::__construct();
+        $this->setNavbar("partial/admin_nav", ["current" => "product"]);
+    }
+
+    public function index() {
+        $this->collection();
+    }
+
+    public function collection($page = 1) {
+        $filter = $this->input->get();
+        $filter["currentPage"] = $page;
+        $this->load->model("ProductModel");
+        $data["filter"] = $filter;
+        $data["products"] = $this->ProductModel->GetByLimit($page, 15);
+        $viewData = $this->loadView("staff/products_list", $data);
+        $this->render($viewData);
+    }
+
+    public function add() {
+        $this->load->model("CategoryModel");
+        $data["category"] = $this->CategoryModel->getAll();
+
+        $viewData = $this->loadView("staff/product_form", $data);
+        $this->render($viewData);
+    }
+
+    public function edit($id) {
+        $this->load->model("ProductModel");
+        $data["info"] = $this->ProductModel->GetById($id);
+
+        $this->load->model("CategoryModel");
+        $data["category"] = $this->CategoryModel->getAll();
+
+        $viewData = $this->loadView("staff/product_form", $data);
+        $this->render($viewData);
+    }
+
+    public function remove($id) {
+        $this->load->model("ProductModel");
+        $this->ProductModel->RemoveById($id);
+        redirect("staff/product/");
+    }
+
+    // call from FORM submit
+    public function save() {
+        $this->load->model("ProductModel");
+        $data = $this->input->post();
+        if ($data["id"] == "") {
+            // insert
+            $id = $this->ProductModel->Insert($data);
+        } else {
+            // save
+            $id = $data["id"];
+            unset($data["id"]);
+            $this->ProductModel->Update($id, $data);
+        }
+        redirect("staff/product/");
+    }
+
+}
