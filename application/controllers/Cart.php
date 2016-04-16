@@ -47,11 +47,12 @@ class Cart extends MY_Controller {
     public function confirmOrder() {
         $user = $this->session->userdata("user");
         if ($user == "") {
-            $this->session->set_userdata("force_to_cart_after_signin", TRUE);
+            $this->session->set_userdata("force_to_cart_after_signin", "cart");
             redirect("home/login");
         } else {
             // first create order
             $this->load->model("OrderModel");
+            $this->load->model("ProductModel");
             $dataOrder = [
                 "order_number" => $this->generateOrderNumber(),
                 "member_id" => $this->session->userdata("user")->member_id,
@@ -69,6 +70,7 @@ class Cart extends MY_Controller {
                     "order_detail_amount" => $amount
                 ];
                 $this->OrderModel->InsertRow($dataOrderRow);
+                $this->ProductModel->Reserve($id, $amount);
             }
 
             if ($this->db->trans_status() === FALSE) {
@@ -96,7 +98,7 @@ class Cart extends MY_Controller {
     private function generateOrderNumber() {
         $lastId = $this->OrderModel->GetMaxID();
         $lastId++;
-        $newId = str_pad($lastId, 8, "0", STR_PAD_LEFT);
+        $newId = str_pad($lastId, 5, "0", STR_PAD_LEFT);
         return $newId;
     }
 

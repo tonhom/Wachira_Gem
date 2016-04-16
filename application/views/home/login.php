@@ -20,6 +20,20 @@
             <div class="twelve wide column">
                 <div style="max-width: 500px;">
                     <div class="ui stacked segment">
+                        <?php
+                        if ($this->session->flashdata("login_error") === true) {
+                            ?>
+                            <div class="ui negative message">
+                                <div class="header">
+                                    ไม่สามารถล็อกอินได้
+                                </div>
+                                <p>
+                                    โปรดตรวจสอบชื่อผู้ใช้และรหัสผ่านของท่านให้ถูกต้อง
+                                </p>
+                            </div>
+                            <?php
+                        }
+                        ?>
                         <form class="ui form" method="post" action="<?= site_url("member/signin") ?>">
                             <div class="ui header">เข้าสู่ระบบสำหรับสมาชิก</div>
                             <div class="field">

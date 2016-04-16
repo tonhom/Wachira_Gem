@@ -2,6 +2,12 @@
 
 class ProductModel extends CI_Model {
 
+    public function Reserve($id, $amount) {
+        $data = $this->GetById($id);
+        $this->db->where("product_id", $id);
+        $this->db->update("product", ["product_stock" => $data->product_stock - $amount]);
+    }
+
     public function Search($q) {
         $this->db->like('product_name', $q);
         $this->db->or_like('product_description', $q);

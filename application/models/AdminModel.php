@@ -1,17 +1,17 @@
 <?php
 
-class MemberModel extends CI_Model {
+class AdminModel extends CI_Model {
 
-    public function GetMemberInfo($id) {
-        $this->db->where("member_id", $id);
-        $query = $this->db->get("member");
+    public function GetAdminInfo($id) {
+        $this->db->where("admin_username", $id);
+        $query = $this->db->get("admin");
         return $query->row();
     }
 
     public function insert($data) {
-        $check = $this->checkExistUsername($data["member_username"]);
+        $check = $this->checkExistUsername($data["admin_username"]);
         if ($check == false) {
-            $this->db->insert("member", $data);
+            $this->db->insert("admin", $data);
             return true;
         } else {
             return $check;
@@ -20,8 +20,8 @@ class MemberModel extends CI_Model {
 
     public function checkExistUsername($username) {
         $this->db->select("*");
-        $this->db->from("member");
-        $this->db->where("member.member_username", $username);
+        $this->db->from("admin");
+        $this->db->where("admin.admin_username", $username);
         $query = $this->db->get();
         if ($query->num_rows() == 0) {
             return false;
@@ -32,20 +32,15 @@ class MemberModel extends CI_Model {
 
     public function Identity($username, $password) {
         $this->db->select("*");
-        $this->db->from("member");
-        $this->db->where("member.member_username", $username);
-        $this->db->where("member.member_password", $password);
+        $this->db->from("admin");
+        $this->db->where("admin.admin_username", $username);
+        $this->db->where("admin.admin_password", $password);
         $query = $this->db->get();
         if ($query->num_rows() == 0) {
             return false;
         } else {
             return $query->row();
         }
-    }
-    
-    public function update($id, $data){
-        $this->db->where("member_id", $id);
-        $this->db->update("member", $data);
     }
 
 }

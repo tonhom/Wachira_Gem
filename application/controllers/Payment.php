@@ -2,12 +2,14 @@
 
 class Payment extends MY_Controller {
 
-    public function confirm() {
+    public function confirm($order_number = "") {
         $this->load->model("DateTimeModel");
         $data["months"] = $this->DateTimeModel->getMonthTh();
 
         $this->load->model("CategoryModel");
         $data["category"] = $this->CategoryModel->getAll();
+
+        $data["order_number"] = $order_number;
 
         $this->setNavbar("", ["current" => "confirm_payment"]);
         $this->render($this->loadView("payment/confirm_payment", $data));
@@ -23,28 +25,62 @@ class Payment extends MY_Controller {
     public function save() {
         $data = $this->input->post();
 
-        $model["order_number"] = $data["order_number"];
-        $model["payment_full_name"] = $data["payment_full_name"];
-        $model["payment_email"] = $data["payment_email"];
-        $model["payment_phone"] = $data["payment_phone"];
-        $model["payment_bank"] = $data["payment_bank"];
-        $model["payment_branch"] = $data["payment_branch"];
-        $model["payment_amount"] = $data["payment_amount"];
-        $model["payment_remark"] = $data["payment_remark"];
-        $model["payment_time_transfer"] = $data["payment_time_transfer"];
-        $model["payment_date_transfer"] = "{$data["paid_year"]}-{$data["paid_month"]}-{$data["paid_date"]}";
+        if ($this->session->userdata("user") != "") {
+            $field_name = "payment_evidence";
+            if ($_FILES[$field_name]["size"] > 0) {
+                // load uploader
+                $config['upload_path'] = './content/slip_transfer/';
+                $config['allowed_types'] = 'gif|jpg|png';
+                $config['max_size'] = '2048'; // 2Megabyte(MB) (default unit is kilobyte)
+                $config['max_width'] = '1920';
+                $config['max_height'] = '1080';
+                $config['encrypt_name'] = TRUE;
+                $this->load->library('upload', $config);
 
-        $this->load->model("PaymentModel");
-        $this->db->trans_begin();
-        $this->PaymentModel->Insert($model);
-        if ($this->db->trans_status() === FALSE) {
-            $this->session->set_flashdata("save_error", true);
-            $this->db->trans_rollback();
+                if ($this->upload->do_upload($field_name)) {
+                    $uploadData = $this->upload->data();
+                    $model["payment_evidence"] = $uploadData["file_name"];
+                } else {
+                    $this->load->model("DateTimeModel");
+                    $dataView["months"] = $this->DateTimeModel->getMonthTh();
+
+                    $this->load->model("CategoryModel");
+                    $dataView["category"] = $this->CategoryModel->getAll();
+                    $dataView["error"] = $this->upload->display_errors();
+                    $this->setNavbar("", ["current" => "confirm_payment"]);
+                    $this->render($this->loadView("payment/confirm_payment", $dataView));
+                }
+            }
+
+            $model["order_number"] = $data["order_number"];
+            $model["member_id"] = $this->session->userdata("user")->member_id;
+            $model["payment_bank"] = $data["payment_bank"];
+            $model["payment_branch"] = $data["payment_branch"];
+            $model["payment_amount"] = $data["payment_amount"];
+            $model["payment_remark"] = $data["payment_remark"];
+            $model["payment_time_transfer"] = $data["payment_time_transfer"];
+            $model["payment_date_transfer"] = "{$data["paid_year"]}-{$data["paid_month"]}-{$data["paid_date"]}";
+
+            $this->load->model("PaymentModel");
+            $this->load->model("OrderModel");
+            $this->db->trans_begin();
+            $this->PaymentModel->Insert($model);
+            // update payment status
+            $this->OrderModel->Paid($data["order_number"]);
+            if ($this->db->trans_status() === FALSE) {
+                $this->session->set_flashdata("save_error", true);
+                $this->db->trans_rollback();
+            } else {
+                $this->session->set_flashdata("save_success", true);
+                $this->session->unset_userdata("payment_form_data");
+                $this->db->trans_commit();
+            }
+            redirect("payment/confirm");
         } else {
-            $this->session->set_flashdata("save_success", true);
-            $this->db->trans_commit();
+            $this->session->set_userdata("payment_form_data", $data);
+            $this->session->set_userdata("force_to_cart_after_signin", "payment");
+            redirect("home/login");
         }
-        redirect("payment/confirm");
     }
 
 }

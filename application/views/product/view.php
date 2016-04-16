@@ -8,7 +8,7 @@ $base = $baseArr[$countDir - 1];
 $carts = $this->session->userdata("order_items") == "" ? [] : $this->session->userdata("order_items");
 $default = 1;
 $inCart = false;
-if(isset($carts[$product->product_id])){
+if (isset($carts[$product->product_id])) {
     $inCart = TRUE;
     $default = $carts[$product->product_id];
 }
@@ -18,16 +18,16 @@ if(isset($carts[$product->product_id])){
         <div class="row">
             <div class="four wide column">
                 <?php
-                if($inCart === TRUE){
+                if ($inCart === TRUE) {
                     ?>
-                <div class="ui positive message">
-                    <div class="header">
-                        <i class="check icon"></i>
-                        อยู่ในตะกร้า
+                    <div class="ui positive message">
+                        <div class="header">
+                            <i class="check icon"></i>
+                            อยู่ในตะกร้า
+                        </div>
+                        <p>สินค้าชิ้นนี้อยู่ในตะกร้าสินค้าแล้ว</p>
                     </div>
-                    <p>สินค้าชิ้นนี้อยู่ในตะกร้าสินค้าแล้ว</p>
-                </div>
-                <?php
+                    <?php
                 }
                 ?>
                 <div class="ui card">
@@ -45,20 +45,35 @@ if(isset($carts[$product->product_id])){
                             ราคา <strong><?= number_format($product->product_price) ?> บาท</strong>
                         </p>
                     </div>
-                    <div class="extra content">
-                        <div class="ui form">
-                            <div class="field">
-                                <label>จำนวนสินค้า</label>
-                                <div class="ui fluid action input">
-                                    <input type="number" name="amount" value="<?=$default?>" id="amount" min="1" step="1" />
-                                    <a href="<?= site_url("cart/addItem/{$product->product_id}") ?>" class="ui button primary addToCart">
-                                        <i class="add to cart icon"></i> เพิ่มเข้าตะกร้า
-                                    </a>
+                    <?php
+                    if ($product->product_stock > 0) {
+                        ?>
+                        <div class="extra content">
+                            <form class="ui form" onsubmit="return false">
+                                <div class="field">
+                                    <label>จำนวนสินค้า</label>
+                                    <div class="ui fluid action input">
+                                        <input type="number" name="amount" value="<?= $default ?>" id="amount" min="1" step="1" max="<?= $product->product_stock ?>" />
+                                        <a href="<?= site_url("cart/addItem/{$product->product_id}") ?>" class="ui button primary addToCart">
+                                            <i class="add to cart icon"></i> เพิ่มเข้าตะกร้า
+                                        </a>
+                                    </div>
                                 </div>
-                            </div>
 
+                            </form>
+                            <br />
+                            <p>สินค้าคงเหลือใน Stock : <strong><?= $product->product_stock ?></strong> ชิ้น</p>
                         </div>
-                    </div>
+                        <?php
+                    } else {
+                        ?>
+                        <div class="content">
+                            <h3 class="ui orange header">Out of stock</h3>
+                            <p>ไม่มีสินค้าใน Stock</p>
+                        </div>
+                        <?php
+                    }
+                    ?>
                 </div>
             </div>
             <div class="twelve wide column">
@@ -79,19 +94,24 @@ if(isset($carts[$product->product_id])){
 
 <script src="<?= base_url("asset/js/jquery.reel.js") ?>"></script>
 <script>
-    $.reel.def.indicator = 10;
-    $('#image360Holder').reel({
-        images: "/<?= $base ?>/images/<?= $product->product_imgDir ?>/#.JPG",
-        frames: 15,
-        loops: true,
-        speed: 0.05,
-        revolution: 300
-    });
+                            $.reel.def.indicator = 10;
+                            $('#image360Holder').reel({
+                                images: "/<?= $base ?>/images/<?= $product->product_imgDir ?>/#.JPG",
+                                frames: 15,
+                                loops: true,
+                                speed: 0.05,
+                                revolution: 300
+                            });
 
-    $(".addToCart").click(function () {
-        var amount = $("#amount").val();
-        var href = $(this).attr("href");
-        href += "/" + amount;
-        $(this).attr("href", href);
-    });
+                            $(".addToCart").click(function () {
+                                var amount = $("#amount").val();
+                                var max = <?= $product->product_stock ?>;
+                                var href = $(this).attr("href");
+                                if (amount > max) {
+                                    href += "/" + max;
+                                } else {
+                                    href += "/" + amount;
+                                }
+                                $(this).attr("href", href);
+                            });
 </script>

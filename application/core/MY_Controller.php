@@ -43,5 +43,11 @@ class MY_Controller extends CI_Controller {
     public function loadView($viewName, $data = NULL) {
         return $this->load->view($viewName, $data, TRUE);
     }
+    
+    public function requireAdmin(){
+        if($this->session->userdata("admin") == ""){
+            redirect("Staff/Admin/signin");
+        }
+    }
 
 }

@@ -31,7 +31,7 @@
                     </div>
                     <?php
                 }
-                
+
                 if ($this->session->flashdata("save_error") === TRUE) {
                     ?>
                     <div class="ui negative message">
@@ -44,7 +44,7 @@
                     </div>
                     <?php
                 }
-                
+
                 if ($this->session->flashdata("save_success") === TRUE) {
                     ?>
                     <div class="ui positive message">
@@ -103,7 +103,7 @@
                                         </td>
                                         <td>
                                             <div class="ui fluid action input">
-                                                <input type="number" value="<?= $amount ?>" class="amount" min="1" step="1" />
+                                                <input type="number" value="<?= $amount ?>" class="amount" min="1" step="1" max="<?= $info->product_stock ?>" />
                                                 <a href="<?= site_url("cart/updateItem/{$id}") ?>" class="ui basic blue button updateAmount">
                                                     <i class="write icon"></i>
                                                 </a>
@@ -137,7 +137,13 @@
         $(".updateAmount").click(function () {
             var amount = $(this).parent().find("input").val();
             var href = $(this).attr("href");
-            href += "/" + amount;
+            var max = $(this).parent().find("input").attr("max");
+            
+            if (amount > max) {
+                href += "/" + max;
+            } else {
+                href += "/" + amount;
+            }
             $(this).attr("href", href);
         });
     });

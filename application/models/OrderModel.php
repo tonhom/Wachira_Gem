@@ -27,5 +27,51 @@ class OrderModel extends CI_Model {
         }
         return $maxRow->order_id;
     }
+    
+    public function GetDetail($order_id) {
+        $this->db->where("order_id", $order_id);
+        $query = $this->db->get("order");
+        if ($query->num_rows() > 0) {
+            $result = $query->row();
+            return $result;
+        } else {
+            return FALSE;
+        }
+    }
+
+    public function GetDetailByOrderNumber($order_number) {
+        $this->db->where("order_number", $order_number);
+        $query = $this->db->get("order");
+        if ($query->num_rows() > 0) {
+            $result = $query->row();
+            return $result;
+        } else {
+            return FALSE;
+        }
+    }
+
+    public function GetOrderDetailList($id) {
+        $this->db->select("*");
+        $this->db->from("order_detail");
+        $this->db->join("product", "product.product_id = order_detail.product_id");
+        $this->db->where("order_detail.order_id", $id);
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    public function GetMyOrder($member_id) {
+        $this->db->where("member_id", $member_id);
+        $query = $this->db->get("order");
+        if ($query->num_rows() > 0) {
+            return $query->result();
+        } else {
+            return [];
+        }
+    }
+    
+    public function Paid($order_number){
+        $this->db->where("order_number", $order_number);
+        $this->db->update("order", ["order_status"=> "รอการจัดส่ง"]);
+    }
 
 }

@@ -16,8 +16,18 @@
             <?php
         }
         ?>
-        
+
         <div class="right menu">
+            <?php
+            if ($this->session->userdata("admin") != "") {
+                ?>
+                <a href="<?= site_url("Staff/Admin/signout") ?>" class="item">
+                    <i class="sign out icon"></i>
+                    ออกจากระบบ
+                </a>
+                <?php
+            }
+            ?>
             <a href="<?= site_url("home/") ?>" class="item" style='background-color : #2185d0;color:#fff;'>
                 <i class="right arrow icon"></i>
                 หน้าร้านค้า
