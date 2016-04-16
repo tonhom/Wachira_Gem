@@ -19,6 +19,9 @@
             </div>
             <div class="twelve wide column">
                 <div class="ui segment">
+                    <img src="<?=  base_url("asset/img/delivery.png")?>" class="ui fluid image" />
+                </div>
+                <div class="ui segment">
                     <h4 class="ui header">3.1	จัดส่งสินค้าโดย บริษัท อินเตอร์ เอ็กซ์เพรส โฮม ดิลิเวอรี่ จำกัด โดยมีเงื่อนไขจัดส่งดังนี้ (http://www.iel.co.th)</h4>
                     <div class="ui list">
                         <div class="item">

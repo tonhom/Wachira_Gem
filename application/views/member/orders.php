@@ -47,7 +47,7 @@
                                         <td>
                                             <?= number_format($order->order_total_price) ?>
                                         </td>
-                                        <td>
+                                        <td style="color : <?=$order->order_status == "รอการชำระเงิน" ? "orange" : "inherit"?>">
                                             <?php
                                             echo $order->order_status;
 //                                            if ($IPayment->CheckPaymentPaid($order->order_number)) {

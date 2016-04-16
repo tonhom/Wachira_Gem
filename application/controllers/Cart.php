@@ -32,9 +32,9 @@ class Cart extends MY_Controller {
         $this->render($this->loadView("cart/order_detail", $data));
     }
 
-    public function clear() {
+    public function clear($order_id) {
         $this->session->set_userdata("order_items", []);
-        redirect("cart/items");
+        redirect("order/details/{$order_id}");
     }
 
     public function updateItem($id, $amount) {
@@ -80,7 +80,7 @@ class Cart extends MY_Controller {
                 $this->session->set_flashdata("save_success", TRUE);
                 $this->db->trans_commit();
             }
-            $this->clear();
+            $this->clear($order_id);
         }
     }
 

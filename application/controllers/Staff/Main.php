@@ -18,6 +18,9 @@ class Main extends MY_Controller {
         $this->load->model("MemberModel");
         $data["instantMember"] = $this->MemberModel;
         
+        $this->load->model("DateTimeModel");
+        $data["DateTime"] = $this->DateTimeModel;
+        
         $viewData = $this->loadView("staff/main", $data);
         $this->render($viewData);
     }

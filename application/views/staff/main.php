@@ -1,7 +1,6 @@
 <div class="ui container"  style="margin-top: 58px;">
     <div class="ui segment">
         <h1>ยินดีต้อนรับสู่ระบบจัดการสินค้า</h1>
-        <h2>สวัสดีคุณ ...</h2>
     </div>
 
     <div class="ui two column grid">
@@ -29,10 +28,10 @@
                                 <tr>
                                     <td><?= $count++ ?></td>
                                     <td><?= $memberInfo->member_full_name ?></td>
-                                    <td><?= $item->order_date_order ?></td>
+                                    <td><?= $DateTime->ToThaiDate($item->order_date_order, TRUE) ?></td>
                                     <td>
-                                        <a href="<?= site_url("staff/order/detail/{$item->order_id}") ?>">
-                                            <i class="info icon"></i>
+                                        <a class="ui basic button" href="<?= site_url("staff/order/detail/{$item->order_id}") ?>">
+                                            <i class="info icon"></i> ดู
                                         </a>
                                     </td>
                                 </tr>

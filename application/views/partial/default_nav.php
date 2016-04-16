@@ -2,13 +2,7 @@
     <div class="ui container">
         <ul id="slider" class="homepage-slider">
             <li>
-                <img src="<?= base_url("asset/img/Utcc.gif") ?>" class="ui bordered rounded fluid image" style="max-height : 220px;" />
-            </li>
-            <li>
-                <img data-src="holder.js/100px220?text=Slide2" class="ui bordered rounded fluid image" />
-            </li>
-            <li>
-                <img data-src="holder.js/100px220?text=Slide3" class="ui bordered rounded fluid image" />
+                <img src="<?= base_url("asset/img/banner.gif") ?>" class="ui bordered rounded fluid image" style="max-height : 220px;" />
             </li>
         </ul>
     </div>

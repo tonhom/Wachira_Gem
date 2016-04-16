@@ -60,7 +60,7 @@
                 ?>
                 <div class="ui segments">
                     <div class="ui fluid top attached steps">
-                        <div class="completed step">
+                        <div class="<?= empty($this->session->userdata("order_items")) ? "" : "completed" ?> step">
                             <i class="cart icon"></i>
                             <div class="content">
                                 <div class="title">ช็อปปิ้ง</div>
@@ -124,7 +124,7 @@
                     <div class="ui center aligned segment">
                         <a href="<?= site_url("product/") ?>" class="ui button">เลือกสินค้าต่อ</a>
                         <!--<a href="<?= site_url("cart/update") ?>" class="ui green button">คำนวณใหม่</a>-->
-                        <a href="<?= site_url("cart/orderDetail") ?>" class="ui primary button">ขั้นตอนต่อไป</a>
+                        <a href="<?= site_url("cart/orderDetail") ?>" class="ui primary button" id="btnNextConfirmOrder">ขั้นตอนต่อไป</a>
                     </div>
                 </div>
             </div>
@@ -133,12 +133,21 @@
 </div>
 
 <script>
+    $("#btnNextConfirmOrder").click(function (e) {
+        var result = confirm("ต้องการที่จะเลือกสินค้าเพิ่มเติมหรือไม่");
+        if (result === true) {
+            e.preventDefault();
+            window.location = "<?= site_url("product/") ?>";
+        } else {
+            return true;
+        }
+    });
     $(function () {
         $(".updateAmount").click(function () {
             var amount = $(this).parent().find("input").val();
             var href = $(this).attr("href");
             var max = $(this).parent().find("input").attr("max");
-            
+
             if (amount > max) {
                 href += "/" + max;
             } else {

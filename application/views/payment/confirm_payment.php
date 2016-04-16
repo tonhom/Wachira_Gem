@@ -241,14 +241,14 @@ if ($data == "") {
     $("#form").submit(function () {
         if (hasOrder === true) {
             if ($("#payment_bank").val() == "" || $("#paid_year").val() == "" || $("#paid_month").val() == "" || $("#paid_date").val() == "") {
-                alert("โปรดกรอกข้อมูลให้ครบ");
+                swal("ข้อความจากระบบ", "โปรดกรอกข้อมูลให้ครบ", "warning");
                 return false;
             } else {
                 return true;
             }
 
         } else {
-            alert("กรุณาระบุหมายเลขใบสั่งซื้อและตรวจสอบ");
+            swal("ข้อความจากระบบ", "กรุณาระบุหมายเลขใบสั่งซื้อและตรวจสอบ", "warning");
             return false;
         }
     });
@@ -265,7 +265,7 @@ if ($data == "") {
                 if (response.error) {
                     var tableBody = $("#orderDetailTable > tbody");
                     tableBody.html("");
-                    alert("ไม่พบรายการสั่งซื้อหมายเลขนี้");
+                    swal("ข้อความจากระบบ", "ไม่พบรายการสั่งซื้อหมายเลขนี้", "warning");
                 } else {
                     hasOrder = true;
                     var tableBody = $("#orderDetailTable > tbody");
@@ -304,7 +304,7 @@ if ($data == "") {
                 }
             }, "json");
         } else {
-            alert("กรุณาระบุหมายเลขใบสั่งซื้อ");
+            swal("ข้อความจากระบบ", "กรุณาระบุหมายเลขใบสั่งซื้อ", "warning");
         }
     });
 </script>

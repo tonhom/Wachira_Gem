@@ -19,4 +19,28 @@ class Home extends MY_Controller{
         $this->setNavbar("", ["current"=> "home"]);
         $this->render($this->loadView("home/login", $data));
     }
+    
+    public function about(){
+        $this->load->model("CategoryModel");
+        $data["category"] = $this->CategoryModel->getAll();
+        
+        $this->setNavbar("", ["current"=> "home"]);
+        $this->render($this->loadView("home/about", $data));
+    }
+    
+    public function sodiac(){
+        $this->load->model("CategoryModel");
+        $data["category"] = $this->CategoryModel->getAll();
+        
+        $this->setNavbar("", ["current"=> "home"]);
+        $this->render($this->loadView("home/sodiac", $data));
+    }
+    
+    public function policy(){
+        $this->load->model("CategoryModel");
+        $data["category"] = $this->CategoryModel->getAll();
+        
+        $this->setNavbar("", ["current"=> "home"]);
+        $this->render($this->loadView("home/policy", $data));
+    }
 }

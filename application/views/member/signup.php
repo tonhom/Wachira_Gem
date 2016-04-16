@@ -27,6 +27,44 @@
                             <div class="ui grid form">
                                 <div class="row">
                                     <div class="four wide column">
+                                        ชื่อเข้าระบบ
+                                    </div>
+                                    <div class="nine wide column">
+                                        <div class="ui action fluid input">
+                                            <input type="text" name="member_username" id="member_username" required="" />
+                                            <button type="button" class="ui primary button" id="btnCheckUsername">
+                                                <i class="check circle icon"></i>
+                                                ตรวจสอบ
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="three wide column"></div>
+                                </div>
+                                <div class="row">
+                                    <div class="four wide column">
+                                        รหัสผ่าน
+                                    </div>
+                                    <div class="nine wide column">
+                                        <div class="field">
+                                            <input type="password" name="member_password" required="" />
+                                        </div>
+                                    </div>
+                                    <div class="three wide column"></div>
+                                </div>
+                                <div class="row">
+                                    <div class="four wide column">
+                                        อีเมล
+                                    </div>
+                                    <div class="nine wide column">
+                                        <div class="field">
+                                            <input type="email" name="member_email" required="" />
+                                        </div>
+                                    </div>
+                                    <div class="three wide column"></div>
+                                </div>
+                                <div class="ui divider"></div>
+                                <div class="row">
+                                    <div class="four wide column">
                                         ชื่อ - สกุล
                                     </div>
                                     <div class="nine wide column">
@@ -121,44 +159,6 @@
                                     </div>
                                     <div class="three wide column"></div>
                                 </div>
-                                <div class="ui divider"></div>
-                                <div class="row">
-                                    <div class="four wide column">
-                                        ชื่อเข้าระบบ
-                                    </div>
-                                    <div class="nine wide column">
-                                        <div class="ui action fluid input">
-                                            <input type="text" name="member_username" id="member_username" required="" />
-                                            <button type="button" class="ui primary button" id="btnCheckUsername">
-                                                <i class="check circle icon"></i>
-                                                ตรวจสอบ
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="three wide column"></div>
-                                </div>
-                                <div class="row">
-                                    <div class="four wide column">
-                                        รหัสผ่าน
-                                    </div>
-                                    <div class="nine wide column">
-                                        <div class="field">
-                                            <input type="password" name="member_password" required="" />
-                                        </div>
-                                    </div>
-                                    <div class="three wide column"></div>
-                                </div>
-                                <div class="row">
-                                    <div class="four wide column">
-                                        อีเมล
-                                    </div>
-                                    <div class="nine wide column">
-                                        <div class="field">
-                                            <input type="email" name="member_email" required="" />
-                                        </div>
-                                    </div>
-                                    <div class="three wide column"></div>
-                                </div>
                             </div>
                         </div>
                         <div class="ui segment">
@@ -185,7 +185,7 @@
         if (usernameDuplicate === false) {
             return true;
         } else {
-            alert("กรุณาตรวจสอบ Username ก่อนดำเนินการสมัคร");
+            swal("ข้อความจากระบบ", "กรุณาตรวจสอบ Username ก่อนดำเนินการสมัคร", "warning");
             return false;
         }
     });
@@ -194,16 +194,16 @@
         if (val != "") {
             $.post("<?= site_url("member/checkDuplicate") ?>", {username: val}, function (response) {
                 if (response.duplicate === false) {
-                    alert("ใช้ username : " + val + " ได้");
+                    swal("ข้อความจากระบบ", "ใช้ username : " + val + " ได้", "success");
                     usernameDuplicate = false;
                 } else {
                     usernameDuplicate = true;
-                    alert("กรุณาระบุ username ใหม่");
+                    swal("ข้อความจากระบบ", "กรุณาระบุ username ใหม่", "warning");
                 }
             }, "json");
 
         } else {
-            alert("กรุณาระบุ Username");
+            swal("ข้อความจากระบบ", "กรุณาระบุ Username", "warning");
         }
     });
 

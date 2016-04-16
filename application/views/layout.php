@@ -11,6 +11,7 @@
         <script src="<?= base_url("asset/js/semantic.min.js") ?>"></script>
         <script src="<?= base_url("asset/js/semantic.min.js") ?>"></script>
         <script src="<?= base_url("asset/js/holder.min.js") ?>"></script>
+        <script src="<?= base_url("asset/js/sweetalert.min.js") ?>"></script>
     </head>
     <body>
         <?= $navbar ?>

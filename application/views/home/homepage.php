@@ -24,29 +24,34 @@
                     ?>
                     <div class="ui segments">
                         <div class="ui segment">
-                            <h2 class="ui header">สินค้าขายดี</h2>
+                            <h2 class="ui header">Promotion !</h2>
                         </div>
-                        <div class="ui pink segment">
-                            <div class="ui two column grid">
-                                <?php
-                                foreach ($bestSeller as $item) {
-                                    ?>
+                        <div class="ui segment">
+                            <div class="ui">
+                                <img src='<?= base_url("asset/img/promotion.jpg") ?>' class='ui image' /><br />
+                                <img src='<?= base_url("asset/img/promotion2.jpg") ?>' class='ui image' />
+                                <!--<?php
+//                                foreach ($bestSeller as $item) {
+//                                    
+                                ?>
                                     <div class="column">
                                         <div class="ui card">
-                                            <a class="image" href="<?= site_url("product/view/{$item->product_id}") ?>">
-                                                <img src="<?= base_url("images/{$item->product_imgDir}/{$item->product_thumbnail}") ?>">
+                                            <a class="image" href="//<?= site_url("product/view/{$item->product_id}") ?>">
+                                                <img src="//<?= base_url("images/{$item->product_imgDir}/{$item->product_thumbnail}") ?>">
                                             </a>
                                             <div class="content">
-                                                <a class="header" href="<?= site_url("product/view/{$item->product_id}") ?>"><?= $item->product_name ?></a>
+                                                <a class="header" href="//<?= site_url("product/view/{$item->product_id}") ?>"><?= $item->product_name ?></a>
                                                 <div class="meta">
-                                                    <a><?= $item->product_description ?></a>
+                                                    <a>//<?= $item->product_description ?></a>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <?php
-                                }
+                                    //<?php
+//                                }
+//                                
                                 ?>
+                                -->
                             </div>
                         </div>
                     </div>
