@@ -46,6 +46,19 @@
                             <span><?= $item->product_description ?></span>
                         </div>
                     </div>
+                    <div class="content">
+                        <?php
+                        if ($item->product_stock == 0) {
+                            ?>
+                            <span style="color: red;">ไม่มีสินค้าคงเหลือ</span>
+                            <?php
+                        } else {
+                            ?>
+                            สินค้าคงเหลือ <?= $item->product_stock ?> ชิ้น
+                            <?php
+                        }
+                        ?>
+                    </div>
                     <div class="extra content">
                         <div class="ui two buttons">
                             <a href="<?= site_url("staff/product/edit/{$item->product_id}") ?>" class="ui green button">แก้ไข</a>

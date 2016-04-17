@@ -46,6 +46,7 @@ class Product extends MY_Controller {
     public function remove($id) {
         $this->load->model("ProductModel");
         $this->ProductModel->RemoveById($id);
+        $this->session->set_flashdata("success", 3);
         redirect("staff/product/");
     }
 

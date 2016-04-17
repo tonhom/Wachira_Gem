@@ -61,6 +61,10 @@ if (!isset($info)) {
                         <input type="text" name="product_thumbnail" placeholder="" required="" value="<?= getValDefault($info, "product_thumbnail") ?>" />
                     </div>
                 </div>
+                <div class=" inline field">
+                    <label>จำนวนสินค้าใน Stock</label>
+                    <input type="number" name="product_stock" min="1" value="<?= getValDefault($info, "product_stock") == "" ? "1" : getValDefault($info, "product_stock") ?>" />
+                </div>
                 <button type="submit" class="ui primary button">บันทึกข้อมูล</button>
             </form>
         </div>
