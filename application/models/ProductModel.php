@@ -94,5 +94,11 @@ class ProductModel extends CI_Model {
             return $query->result();
         }
     }
+    
+    public function InUse($id){
+        $this->db->where("product_id", $id);
+        $query = $this->db->count_all_results("order_detail");
+        return $query;
+    }
 
 }

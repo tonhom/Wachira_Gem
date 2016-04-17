@@ -19,6 +19,7 @@ class Product extends MY_Controller {
         $this->load->model("ProductModel");
         $data["filter"] = $filter;
         $data["products"] = $this->ProductModel->GetByLimit($page, 15);
+        $data["IProduct"] = $this->ProductModel;
         $viewData = $this->loadView("staff/products_list", $data);
         $this->render($viewData);
     }

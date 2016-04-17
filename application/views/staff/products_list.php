@@ -33,6 +33,7 @@
     <div class="ui grid five column">
         <?php
         foreach ($products as $item) {
+            $inuse = $IProduct->InUse($item->product_id);
             ?>
             <div class="column">
                 <div class="ui card">
@@ -48,7 +49,7 @@
                     <div class="extra content">
                         <div class="ui two buttons">
                             <a href="<?= site_url("staff/product/edit/{$item->product_id}") ?>" class="ui green button">แก้ไข</a>
-                            <a href="<?= site_url("staff/product/remove/{$item->product_id}") ?>" onclick="return confirm('ยืนยันการลบ')" class="ui button">ลบ</a>
+                            <a href="<?= site_url("staff/product/remove/{$item->product_id}") ?>" onclick="return confirm('ยืนยันการลบ')" class="ui <?= $inuse > 0 ? "disabled" : "" ?> button">ลบ</a>
                         </div>
                     </div>
                 </div>
