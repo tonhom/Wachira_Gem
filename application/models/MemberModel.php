@@ -2,6 +2,16 @@
 
 class MemberModel extends CI_Model {
 
+    public function CheckMemberEmail($email) {
+        $this->db->where("member_email", $email);
+        $query = $this->db->count_all_results("member");
+        if ($query > 0) {
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+    }
+
     public function GetMemberInfo($id) {
         $this->db->where("member_id", $id);
         $query = $this->db->get("member");
@@ -42,8 +52,8 @@ class MemberModel extends CI_Model {
             return $query->row();
         }
     }
-    
-    public function update($id, $data){
+
+    public function update($id, $data) {
         $this->db->where("member_id", $id);
         $this->db->update("member", $data);
     }
