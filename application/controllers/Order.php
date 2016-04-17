@@ -34,6 +34,9 @@ class Order extends MY_Controller {
         $this->load->model("DateTimeModel");
         $data["DateTime"] = $this->DateTimeModel;
         
+        $this->load->model("MemberModel");
+        $data["IMember"] = $this->MemberModel;
+        
         $content = $this->loadView("member/order_detail", $data);
         $this->render($content);
     }
@@ -48,6 +51,9 @@ class Order extends MY_Controller {
         
         $this->load->model("PaymentModel");
         $data["IPayment"] = $this->PaymentModel;
+        
+        $this->load->model("MemberModel");
+        $data["IMember"] = $this->MemberModel;
         
         $content = $this->loadView("member/order_print", $data);
         echo $content;

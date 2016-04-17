@@ -62,7 +62,15 @@ if (isset($carts[$product->product_id])) {
 
                             </form>
                             <br />
-                            <p>สินค้าคงเหลือใน Stock : <strong><?= $product->product_stock ?></strong> ชิ้น</p>
+                            <div class="ui statistic">
+                                <div class="label">
+                                    สินค้าคงเหลือ
+                                </div>
+                                <div class="value">
+                                    <i class="cubes icon"></i>
+                                    <?= number_format($product->product_stock) ?>
+                                </div>
+                            </div>
                         </div>
                         <?php
                     } else {

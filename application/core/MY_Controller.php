@@ -39,6 +39,10 @@ class MY_Controller extends CI_Controller {
         }
         $this->content_footer = $this->loadView($viewName, $data);
     }
+    
+    public function emptyFooter(){
+        $this->content_footer = "";
+    }
 
     public function loadView($viewName, $data = NULL) {
         return $this->load->view($viewName, $data, TRUE);

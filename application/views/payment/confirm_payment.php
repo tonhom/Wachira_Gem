@@ -26,7 +26,7 @@ if ($data == "") {
             <div class="twelve wide column">
                 <form class="ui form" method="post" action="<?= site_url("payment/save") ?>" enctype="multipart/form-data" id="form">
                     <div class="ui container">
-                        <div class="ui segments" style="max-width: 600px;">
+                        <div class="ui segments">
                             <div class="ui active dimmer" id="loading_order_detail">
                                 <div class="ui text loader">Loading</div>
                             </div>
@@ -199,7 +199,7 @@ if ($data == "") {
                                     <input type="text" name="payment_remark" value="<?= getValDefault($data, "payment_remark") ?>" />
                                 </div>
                                 <div class="field">
-                                    <label>รูปใบสลิป</label>
+                                    <label>รูปใบสลิป <span style="color: red;">*</span></label>
                                     <input type="file" name="payment_evidence" />
                                     <br />
                                     <span style="color: red;"> - ขนาดไม่เกิน 2MB และกว้างxสูง ไม่เกิน 1920x1080 พิกเซล</span><br />

@@ -6,6 +6,7 @@ class Product extends MY_Controller {
         parent::__construct();
         $this->requireAdmin();
         $this->setNavbar("partial/admin_nav", ["current" => "product"]);
+        $this->emptyFooter();
     }
 
     public function index() {

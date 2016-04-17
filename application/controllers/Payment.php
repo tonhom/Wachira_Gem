@@ -50,32 +50,43 @@ class Payment extends MY_Controller {
                     $this->setNavbar("", ["current" => "confirm_payment"]);
                     $this->render($this->loadView("payment/confirm_payment", $dataView));
                 }
-            }
-
-            $model["order_number"] = $data["order_number"];
-            $model["member_id"] = $this->session->userdata("user")->member_id;
-            $model["payment_bank"] = $data["payment_bank"];
-            $model["payment_branch"] = $data["payment_branch"];
-            $model["payment_amount"] = $data["payment_amount"];
-            $model["payment_remark"] = $data["payment_remark"];
-            $model["payment_time_transfer"] = $data["payment_time_transfer"];
-            $model["payment_date_transfer"] = "{$data["paid_year"]}-{$data["paid_month"]}-{$data["paid_date"]}";
-
-            $this->load->model("PaymentModel");
-            $this->load->model("OrderModel");
-            $this->db->trans_begin();
-            $this->PaymentModel->Insert($model);
-            // update payment status
-            $this->OrderModel->Paid($data["order_number"]);
-            if ($this->db->trans_status() === FALSE) {
-                $this->session->set_flashdata("save_error", true);
-                $this->db->trans_rollback();
             } else {
-                $this->session->set_flashdata("save_success", true);
-                $this->session->unset_userdata("payment_form_data");
-                $this->db->trans_commit();
+                $this->load->model("DateTimeModel");
+                $dataView["months"] = $this->DateTimeModel->getMonthTh();
+
+                $this->load->model("CategoryModel");
+                $dataView["category"] = $this->CategoryModel->getAll();
+                $dataView["error"] = "กรุณาระบุไฟล์สลิป";
+                $this->setNavbar("", ["current" => "confirm_payment"]);
+                $this->render($this->loadView("payment/confirm_payment", $dataView));
             }
-            redirect("payment/confirm");
+
+            if (isset($model["payment_evidence"])) {
+                $model["order_number"] = $data["order_number"];
+                $model["member_id"] = $this->session->userdata("user")->member_id;
+                $model["payment_bank"] = $data["payment_bank"];
+                $model["payment_branch"] = $data["payment_branch"];
+                $model["payment_amount"] = $data["payment_amount"];
+                $model["payment_remark"] = $data["payment_remark"];
+                $model["payment_time_transfer"] = $data["payment_time_transfer"];
+                $model["payment_date_transfer"] = "{$data["paid_year"]}-{$data["paid_month"]}-{$data["paid_date"]}";
+
+                $this->load->model("PaymentModel");
+                $this->load->model("OrderModel");
+                $this->db->trans_begin();
+                $this->PaymentModel->Insert($model);
+                // update payment status
+                $this->OrderModel->Paid($data["order_number"]);
+                if ($this->db->trans_status() === FALSE) {
+                    $this->session->set_flashdata("save_error", true);
+                    $this->db->trans_rollback();
+                } else {
+                    $this->session->set_flashdata("save_success", true);
+                    $this->session->unset_userdata("payment_form_data");
+                    $this->db->trans_commit();
+                }
+                redirect("payment/confirm");
+            }
         } else {
             $this->session->set_userdata("payment_form_data", $data);
             $this->session->set_userdata("force_to_cart_after_signin", "payment");

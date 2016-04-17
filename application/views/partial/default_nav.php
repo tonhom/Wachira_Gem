@@ -1,11 +1,12 @@
-<div  style="padding-top: 10px; padding-bottom: 10px;background-color: #323232;">
-    <div class="ui container">
+<div  style="background-color: #323232;">
+<!--    <div class="ui container">
         <ul id="slider" class="homepage-slider">
             <li>
                 <img src="<?= base_url("asset/img/banner.gif") ?>" class="ui bordered rounded fluid image" style="max-height : 220px;" />
             </li>
         </ul>
-    </div>
+    </div>-->
+    <img src="<?= base_url("asset/img/banner.gif") ?>" class="ui fluid image" style="max-height : 250px;" />
 </div>
 <div class="ui pointing borderless menu" id="mainNavbar">
     <div class="ui container">

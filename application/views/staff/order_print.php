@@ -7,11 +7,26 @@
         <link rel="stylesheet" type="text/css" href="<?= base_url("asset/css/semantic.min.css") ?>"/>
     </head>
     <body>
+        <?php
+        $member = $IMember->GetMemberInfo($order->member_id);
+        ?>
         <div class="ui segments">
             <div class="ui segment">
                 <h3 class="ui header">
-                    ใบรายการสั่งซื้อเลขที่ : <?= $order->order_number ?>
+                    เลขที่ใบสั่งซื้อ : <?= $order->order_number ?>
                 </h3>
+            </div>
+            <div class="ui horizontal segments" style="background-color: #fff;">
+                <div class="ui segment">
+                    <h4 class="ui header">ข้อมูลลูกค้า</h4>
+                    ชื่อลูกค้า : <?= $member->member_full_name ?> <br />
+                    อีเมล์ : <?= $member->member_email ?><br />
+                    เบอร์โทรติดต่อ : <?= $member->member_tel ?>
+                </div>
+                <div class="ui segment">
+                    <h4 class="ui header">ที่อยู่สำหรับจัดส่ง</h4>
+                    ที่อยู่ : <?= $member->member_address ?>
+                </div>
             </div>
             <div class="ui horizontal segments" style="background-color: #fff;">
                 <div class="ui segment">

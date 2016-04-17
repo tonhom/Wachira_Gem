@@ -18,11 +18,11 @@
                 </div>
             </div>
             <div class="twelve wide column">
-                <div class="ui segments" style="max-width: 600px;">
+                <div class="ui segments">
                     <div class="ui segment">
-                        <h2 class="ui pink header">การชำระเงิน</h2>
+                        <h2 class="ui header">การชำระเงิน</h2>
                     </div>
-                    <div class="ui segment">
+                    <div class="ui segment" style="min-height: 500px;">
                         <div class="ui items">
                             <div class="item">
                                 <div class="ui small image">

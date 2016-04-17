@@ -1,4 +1,4 @@
-<div class="ui stacked segment" style="max-width: 500px; margin: auto;margin-top: 70px;">
+<div class="ui stacked segment" style="max-width: 500px; margin: auto; margin-top: 70px; margin-bottom: 240px;">
     <?php
     if ($this->session->flashdata("login_error") === true) {
         ?>

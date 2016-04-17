@@ -6,6 +6,7 @@ class Main extends MY_Controller {
         parent::__construct();
         $this->requireAdmin();
         $this->setNavbar("partial/admin_nav", ["current" => "home"]);
+        $this->emptyFooter();
     }
 
     public function index() {
@@ -20,6 +21,8 @@ class Main extends MY_Controller {
         
         $this->load->model("DateTimeModel");
         $data["DateTime"] = $this->DateTimeModel;
+        
+        $data["IOrder"] = $this->OrderModel;
         
         $viewData = $this->loadView("staff/main", $data);
         $this->render($viewData);

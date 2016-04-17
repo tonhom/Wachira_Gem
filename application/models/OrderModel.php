@@ -1,6 +1,13 @@
 <?php
 
 class OrderModel extends CI_Model {
+    
+    public function GetPaidOrder() {
+        $this->db->join("member", "member.member_id = order.member_id");
+        $this->db->where("order.order_status", "รอการจัดส่ง");
+        $query = $this->db->get("order");
+        return $query->result();
+    }
 
     public function InsertHead($data) {
         $this->db->insert("order", $data);
@@ -12,8 +19,8 @@ class OrderModel extends CI_Model {
     }
 
     public function GetLastOrder() {
+        $this->db->where("order_status", "รอการชำระเงิน");
         $this->db->order_by("order_date_order", "desc");
-        $this->db->limit(5);
         $query = $this->db->get("order");
         return $query->result();
     }
@@ -49,6 +56,19 @@ class OrderModel extends CI_Model {
             return FALSE;
         }
     }
+    
+    public function SearchByOrderNumber($order_number) {
+        $this->db->join("member", "member.member_id = order.member_id");
+        //$this->db->where("order.order_status", "รอการจัดส่ง");
+        $this->db->like("order.order_number", $order_number);
+        $query = $this->db->get("order");
+        if ($query->num_rows() > 0) {
+            $result = $query->result();
+            return $result;
+        } else {
+            return FALSE;
+        }
+    }
 
     public function GetOrderDetailList($id) {
         $this->db->select("*");
@@ -72,6 +92,20 @@ class OrderModel extends CI_Model {
     public function Paid($order_number){
         $this->db->where("order_number", $order_number);
         $this->db->update("order", ["order_status"=> "รอการจัดส่ง"]);
+    }
+    
+    public function Shiped($order_id){
+        $this->db->where("order_id", $order_id);
+        $this->db->update("order", ["order_status"=> "จัดส่งแล้ว"]);
+    }
+    
+    public function GetShiped(){
+        $this->db->join("member", "member.member_id = order.member_id");
+        $this->db->where("order.order_status", "จัดส่งแล้ว");
+        $this->db->order_by("order.order_id", "DESC");
+        $this->db->limit(30);
+        $query = $this->db->get("order");
+        return $query->result();
     }
 
 }

@@ -1,4 +1,4 @@
-<div  style='background-color: #fff;'>
+<div  style='background-color: #f3f3f3;'>
     <div class="ui container">
         <div class="ui two column grid">
             <div class="ui column">

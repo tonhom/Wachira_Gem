@@ -5,6 +5,7 @@ class Order extends MY_Controller {
     public function __construct() {
         parent::__construct();
         $this->setNavbar("partial/admin_nav", ["current"=> "home"]);
+        $this->emptyFooter();
     }
 
     public function GetDetail() {
@@ -34,6 +35,9 @@ class Order extends MY_Controller {
         $this->load->model("DateTimeModel");
         $data["DateTime"] = $this->DateTimeModel;
         
+        $this->load->model("MemberModel");
+        $data["IMember"] = $this->MemberModel;
+        
         $content = $this->loadView("staff/order_detail", $data);
         $this->render($content);
     }
@@ -48,6 +52,9 @@ class Order extends MY_Controller {
         
         $this->load->model("PaymentModel");
         $data["IPayment"] = $this->PaymentModel;
+        
+        $this->load->model("MemberModel");
+        $data["IMember"] = $this->MemberModel;
         
         $content = $this->loadView("staff/order_print", $data);
         echo $content;

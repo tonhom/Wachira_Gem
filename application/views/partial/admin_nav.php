@@ -3,9 +3,9 @@
         <?php
         $navItems = [
             ["name" => "home", "href" => "staff/main/", "icon" => "home", "text" => "หน้าหลัก"],
+            ["name" => "shipping", "href" => "staff/shipping/", "icon" => "shipping", "text" => "การจัดส่ง"],
             ["name" => "category", "href" => "staff/category/", "icon" => "cubes", "text" => "ประเภทสินค้า"],
             ["name" => "product", "href" => "staff/product/", "icon" => "diamond", "text" => "สินค้า"],
-            ["name" => "shipping", "href" => "staff/shipping/", "icon" => "shipping", "text" => "การจัดส่ง"],
             ["name" => "message", "href" => "staff/message/", "icon" => "comment", "text" => "ข้อความติดต่อ"],
         ];
         foreach ($navItems as $item) {

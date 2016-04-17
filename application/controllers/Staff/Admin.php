@@ -3,6 +3,7 @@
 class Admin extends MY_Controller{
     public function signin(){
         $this->setNavbar("partial/admin_nav", ["current" => "home"]);
+        $this->emptyFooter();
         $this->render($this->loadView("staff/login"));
     }
     public function signout(){
