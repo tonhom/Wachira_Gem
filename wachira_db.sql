@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 16, 2016 at 03:44 PM
+-- Generation Time: Apr 17, 2016 at 01:48 PM
 -- Server version: 5.6.24
 -- PHP Version: 5.6.8
 
@@ -104,17 +104,7 @@ CREATE TABLE IF NOT EXISTS `member` (
   `member_birthday` date DEFAULT NULL,
   `member_gender` varchar(30) DEFAULT NULL,
   `member_address` varchar(300) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `member`
---
-
-INSERT INTO `member` (`member_id`, `member_username`, `member_password`, `member_full_name`, `member_email`, `member_tel`, `member_birthday`, `member_gender`, `member_address`) VALUES
-(1, 'test', '12345', 'test man', 'test@gmail.com', '1234567890', '1990-07-28', 'ชาย', 'Somewhere pattaya'),
-(2, 'tonhom', '1234', 'test test', 'tonhom.buu@gmail.com', '0806340768', '1990-07-28', 'ชาย', 'พัทยา'),
-(3, 'test2', '1234', 'test2', 'tonhom@nuu.com', '0806340768', '1990-05-04', 'ชาย', 'พัทยา'),
-(4, 'test3', '1234', 'dfdf', '1234@mail.com', 'jk', '1900-02-03', 'jkj', 'kjk');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -129,14 +119,7 @@ CREATE TABLE IF NOT EXISTS `order` (
   `order_date_order` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `order_total_price` float NOT NULL DEFAULT '0',
   `order_status` enum('รอการชำระเงิน','รอการจัดส่ง','จัดส่งแล้ว') NOT NULL DEFAULT 'รอการชำระเงิน'
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `order`
---
-
-INSERT INTO `order` (`order_id`, `order_number`, `member_id`, `order_date_order`, `order_total_price`, `order_status`) VALUES
-(1, '00000001', 1, '2016-04-16 09:56:34', 3000, 'รอการจัดส่ง');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -146,17 +129,10 @@ INSERT INTO `order` (`order_id`, `order_number`, `member_id`, `order_date_order`
 
 CREATE TABLE IF NOT EXISTS `order_detail` (
   `order_detail_id` int(10) unsigned NOT NULL,
-  `product_id` int(11) NOT NULL,
+  `product_id` int(10) unsigned NOT NULL,
   `order_detail_amount` int(11) NOT NULL,
-  `order_id` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `order_detail`
---
-
-INSERT INTO `order_detail` (`order_detail_id`, `product_id`, `order_detail_amount`, `order_id`) VALUES
-(1, 1, 1, 1);
+  `order_id` int(10) unsigned NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -175,14 +151,7 @@ CREATE TABLE IF NOT EXISTS `payment` (
   `payment_time_transfer` varchar(50) NOT NULL,
   `payment_remark` varchar(300) DEFAULT NULL,
   `payment_evidence` varchar(300) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `payment`
---
-
-INSERT INTO `payment` (`payment_id`, `member_id`, `order_number`, `payment_bank`, `payment_branch`, `payment_amount`, `payment_date_transfer`, `payment_time_transfer`, `payment_remark`, `payment_evidence`) VALUES
-(2, 1, '00000001', 'KTB', 'Bangsaen', 3000, '2016-04-15', '', '', 'bb3bd713dd9947fd3ae158320bc53c87.PNG');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -207,8 +176,8 @@ CREATE TABLE IF NOT EXISTS `product` (
 --
 
 INSERT INTO `product` (`product_id`, `product_name`, `product_description`, `product_price`, `product_stock`, `product_date_add`, `category_id`, `product_imgDir`, `product_thumbnail`) VALUES
-(1, 'แหวนเพชร A01', 'แหวนเพชร A01', 3000, 10, '2016-03-14 23:06:24', 3, 'A01', '1.JPG'),
-(2, 'แหวนเพชร 02', 'แหวนเพชร 02', 5000, 20, '2016-03-14 23:31:56', 3, 'A02', '1.JPG'),
+(1, 'แหวนเพชร A01', 'แหวนเพชร A01', 3000, 9, '2016-03-14 23:06:24', 3, 'A01', '1.JPG'),
+(2, 'แหวนเพชร 02', 'แหวนเพชร 02', 5000, 18, '2016-03-14 23:31:56', 3, 'A02', '1.JPG'),
 (3, 'แหวนเพชร 03', 'แหวนเพชร 03', 4000, 0, '2016-03-14 23:31:56', 3, 'A03', '1.JPG'),
 (4, 'แหวน 04', 'แหวน 04', 5000, 0, '2016-03-14 23:33:32', 3, 'A04', '1.JPG'),
 (7, 'แหวน 05', 'แหวน 05', 5000, 0, '2016-03-27 18:25:11', 3, 'A05', '1.JPG'),
@@ -256,7 +225,7 @@ ALTER TABLE `order`
 -- Indexes for table `order_detail`
 --
 ALTER TABLE `order_detail`
-  ADD PRIMARY KEY (`order_detail_id`);
+  ADD PRIMARY KEY (`order_detail_id`), ADD KEY `product_id` (`product_id`), ADD KEY `order_id` (`order_id`);
 
 --
 -- Indexes for table `payment`
@@ -288,22 +257,22 @@ ALTER TABLE `contact`
 -- AUTO_INCREMENT for table `member`
 --
 ALTER TABLE `member`
-  MODIFY `member_id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+  MODIFY `member_id` int(10) unsigned NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `order`
 --
 ALTER TABLE `order`
-  MODIFY `order_id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+  MODIFY `order_id` int(10) unsigned NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `order_detail`
 --
 ALTER TABLE `order_detail`
-  MODIFY `order_detail_id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+  MODIFY `order_detail_id` int(10) unsigned NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `payment`
 --
 ALTER TABLE `payment`
-  MODIFY `payment_id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+  MODIFY `payment_id` int(10) unsigned NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `product`
 --
@@ -317,14 +286,21 @@ ALTER TABLE `product`
 -- Constraints for table `order`
 --
 ALTER TABLE `order`
-ADD CONSTRAINT `order_fk_member_id` FOREIGN KEY (`member_id`) REFERENCES `member` (`member_id`);
+ADD CONSTRAINT `order_ibfk_1` FOREIGN KEY (`member_id`) REFERENCES `member` (`member_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `order_detail`
+--
+ALTER TABLE `order_detail`
+ADD CONSTRAINT `order_detail_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+ADD CONSTRAINT `order_detail_ibfk_2` FOREIGN KEY (`order_id`) REFERENCES `order` (`order_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `payment`
 --
 ALTER TABLE `payment`
-ADD CONSTRAINT `fk_member_id` FOREIGN KEY (`member_id`) REFERENCES `member` (`member_id`),
-ADD CONSTRAINT `fk_order_number` FOREIGN KEY (`order_number`) REFERENCES `order` (`order_number`);
+ADD CONSTRAINT `payment_ibfk_1` FOREIGN KEY (`member_id`) REFERENCES `member` (`member_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+ADD CONSTRAINT `payment_ibfk_2` FOREIGN KEY (`order_number`) REFERENCES `order` (`order_number`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
