@@ -38,7 +38,7 @@ $member = $IMember->GetMemberInfo($order->member_id);
                         ราคารวมทั้งหมด
                     </div>
                     <div class="value">
-                        <?= number_format($order->order_total_price) ?>
+                        <?= number_format($order->order_total_price, 2) ?>
                     </div>
                 </div>
             </div>

@@ -55,7 +55,17 @@ if (isset($carts[$product->product_id])) {
                                     <div class="ui fluid action input">
                                         <input type="number" name="amount" value="<?= $default ?>" id="amount" min="1" step="1" max="<?= $product->product_stock ?>" />
                                         <a href="<?= site_url("cart/addItem/{$product->product_id}") ?>" class="ui button primary addToCart">
+                                            <?php
+                                            if($inCart){
+                                                ?>
+                                            <i class="cart icon"></i> ปรับปรุง
+                                            <?php
+                                            }else{
+                                                ?>
                                             <i class="add to cart icon"></i> เพิ่มเข้าตะกร้า
+                                            <?php
+                                            }
+                                            ?>
                                         </a>
                                     </div>
                                 </div>

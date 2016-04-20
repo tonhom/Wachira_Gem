@@ -45,7 +45,7 @@
                                             <?= $DateTime->ToThaiDate($order->order_date_order, TRUE) ?>
                                         </td>
                                         <td>
-                                            <?= number_format($order->order_total_price) ?>
+                                            <?= number_format($order->order_total_price, 2) ?>
                                         </td>
                                         <td style="color : <?=$order->order_status == "รอการชำระเงิน" ? "orange" : "inherit"?>">
                                             <?php

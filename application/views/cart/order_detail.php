@@ -68,7 +68,7 @@
                                             <?= $amount ?> ชิ้น
                                         </td>
                                         <td>
-                                            <?= number_format($total) ?>
+                                            <?= number_format($total, 2) ?>
                                         </td>
                                     </tr>
                                     <?php
@@ -79,7 +79,7 @@
                                     <td colspan="2" style='text-align: right;'>
                                         <h4 class="ui header">รวมเป็นเงินทั้งหมด</h4>
                                     </td>
-                                    <td><strong><?= number_format($totalAll) ?></strong></td>
+                                    <td><strong><?= number_format(($totalAll*107)/100, 2) ?></strong></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -107,7 +107,7 @@
                     </div>
                     <div class="ui center aligned segment">
                         <a href="<?= site_url("cart/items") ?>" class="ui button">ย้อนกลับ</a>
-                        <a href="<?= site_url("cart/clear") ?>" class="ui orange button">ยกเลิก</a>
+                        <a href="<?= site_url("cart/clear") ?>" onclick="return confirm('หากยกเลิกระบบจะล้างตะกร้า\ยืนยัน?')" class="ui orange button">ยกเลิก</a>
                         <a href="<?= site_url("cart/confirmOrder") ?>" class="ui primary button">สั่งซื้อสินค้า</a>
                     </div>
                 </div>

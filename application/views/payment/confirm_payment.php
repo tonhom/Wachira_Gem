@@ -270,7 +270,6 @@ if ($data == "") {
                     hasOrder = true;
                     var tableBody = $("#orderDetailTable > tbody");
                     tableBody.html("");
-                    var alltotal = 0;
                     for (var index in response.items) {
                         var tr = $("<tr></tr>");
                         var tdItemName = $("<td></td>");
@@ -282,9 +281,8 @@ if ($data == "") {
                         tdItemName.text(response.items[index].product_name);
                         tdItemDesc.text(response.items[index].product_description);
                         tdItemAmount.text(response.items[index].order_detail_amount);
-                        total = response.items[index].order_detail_amount * response.items[index].product_price;
+                        total = response.items[index].total_price;
                         tdItemTotalPrice.text(total);
-                        alltotal += total;
 
                         tr.append(tdItemName);
                         tr.append(tdItemDesc);
@@ -293,8 +291,8 @@ if ($data == "") {
 
                         tableBody.append(tr);
                     }
-                    var tdTotalLabel = $("<td colspan='3' style='text-align: right;'>ราคารวมทั้งหมด</td>");
-                    var tdTotal = $("<td></td>").text(alltotal);
+                    var tdTotalLabel = $("<td colspan='3' style='text-align: right;font-weight: bold;'>ราคารวมทั้งหมด</td>");
+                    var tdTotal = $("<td style='font-weight: bold;'></td>").text(response.order_total_price);
                     var trTotal = $("<tr></tr>");
                     trTotal.append(tdTotalLabel);
                     trTotal.append(tdTotal);

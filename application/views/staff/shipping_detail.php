@@ -38,7 +38,7 @@ $member = $IMember->GetMemberInfo($order->member_id);
                     <tbody>
                         <tr>
                             <td><?= $payment->payment_bank ?> <?= !empty($payment->payment_branch) ? "สาขา" . $payment->payment_branch : "" ?></td>
-                            <td><?= number_format($payment->payment_amount) ?></td>
+                            <td><?= number_format($payment->payment_amount, 2) ?></td>
                             <td><?= $DateTime->ToThaiDate($payment->payment_date_transfer) ?> <?= !empty($payment->payment_time_transfer) ? $payment->payment_time_transfer : "" ?></td>
                             <td>
                                 <?php
@@ -81,7 +81,7 @@ $member = $IMember->GetMemberInfo($order->member_id);
                         ราคารวมทั้งหมด
                     </div>
                     <div class="value">
-                        <?= number_format($order->order_total_price) ?>
+                        <?= number_format($order->order_total_price, 2) ?>
                     </div>
                 </div>
             </div>

@@ -46,7 +46,7 @@ class Product extends MY_Controller {
     public function remove($id) {
         $this->load->model("ProductModel");
         $this->ProductModel->RemoveById($id);
-        $this->session->set_flashdata("success", 3);
+        $this->session->set_flashdata("success", "ระบบได้ลบข้อมูลสินค้าแล้ว");
         redirect("staff/product/");
     }
 
@@ -57,13 +57,13 @@ class Product extends MY_Controller {
         if ($data["product_id"] == "") {
             // insert
             $id = $this->ProductModel->Insert($data);
-            $this->session->set_flashdata("success", 1);
+            $this->session->set_flashdata("success", "ระบบได้เพิ่มสินค้าเสร็จแล้ว");
         } else {
             // save
             $id = $data["product_id"];
             unset($data["product_id"]);
             $this->ProductModel->Update($id, $data);
-            $this->session->set_flashdata("success", 2);
+            $this->session->set_flashdata("success", "ระบบได้แก้ไขข้อมูลสินค้าเสร็จแล้ว");
         }
         redirect("staff/product/");
     }

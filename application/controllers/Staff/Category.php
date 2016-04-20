@@ -20,13 +20,15 @@ class Category extends MY_Controller {
     public function save() {
         $this->load->model("CategoryModel");
         $requestModel = $this->input->post();
-        if (!empty($requestModel["id"])) {
+        if (!empty($requestModel["category_id"])) {
             // save
-            $id = $requestModel["id"];
-            unset($requestModel["id"]);
+            $id = $requestModel["category_id"];
+            unset($requestModel["category_id"]);
+            $this->session->set_flashdata("success", "ระบบได้บันทึกข้อมูลประเภทสินค้าแล้ว");
             $this->CategoryModel->Update($id, $requestModel);
         } else {
             // insert
+            $this->session->set_flashdata("success", "ระบบได้เพิ่มประเภทสินค้าแล้ว");
             $this->CategoryModel->Insert($requestModel);
         }
         redirect("staff/category");
@@ -44,6 +46,7 @@ class Category extends MY_Controller {
     public function remove($id) {
         $this->load->model("CategoryModel");
         $this->CategoryModel->Remove($id);
+        $this->session->set_flashdata("success", "ระบบได้ลบข้อมูลประเภทสินค้าแล้ว");
         redirect("staff/category");
     }
 

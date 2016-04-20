@@ -2,14 +2,17 @@
     <?php
     if ($this->session->flashdata("success") != "") {
         ?>
-        <div class="ui positive message">
+        <div class="ui positive icon message">
             <i class="close icon"></i>
-            <div class="header">
-                ดำเนินการสำเร็จ
+            <i class="check circle icon"></i>
+            <div class="content">
+                <div class="ui header">
+                    ดำเนินการสำเร็จ
+                </div>
+                <p>
+                    <?= $this->session->flashdata("success") ?>
+                </p>
             </div>
-            <p>
-                <?= $this->session->flashdata("success") == 1 ? "เพิ่มสินค้าสำเร็จ" : "แก้ไขข้อมูลสินค้าสำเร็จ" ?>
-            </p>
         </div>
         <?php
     }

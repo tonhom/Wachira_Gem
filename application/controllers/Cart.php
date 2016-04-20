@@ -32,9 +32,14 @@ class Cart extends MY_Controller {
         $this->render($this->loadView("cart/order_detail", $data));
     }
 
-    public function clear($order_id) {
+    public function clearAfterBuy($order_id) {
         $this->session->set_userdata("order_items", []);
         redirect("order/details/{$order_id}");
+    }
+    
+    public function clear(){
+        $this->session->set_userdata("order_items", []);
+        redirect("cart/items");
     }
 
     public function updateItem($id, $amount) {
@@ -80,7 +85,7 @@ class Cart extends MY_Controller {
                 $this->session->set_flashdata("save_success", TRUE);
                 $this->db->trans_commit();
             }
-            $this->clear($order_id);
+            $this->clearAfterBuy($order_id);
         }
     }
 
@@ -92,7 +97,7 @@ class Cart extends MY_Controller {
             $detail = $this->ProductModel->GetById($id);
             $totalPrice += $detail->product_price * $amount;
         }
-        return $totalPrice;
+        return (($totalPrice*107)/100);
     }
 
     private function generateOrderNumber() {

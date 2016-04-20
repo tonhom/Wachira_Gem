@@ -102,12 +102,7 @@
                                             <a href="<?= site_url("product/view/{$id}") ?>"><?= $info->product_name ?></a>
                                         </td>
                                         <td>
-                                            <div class="ui fluid action input">
-                                                <input type="number" value="<?= $amount ?>" class="amount" min="1" step="1" max="<?= $info->product_stock ?>" />
-                                                <a href="<?= site_url("cart/updateItem/{$id}") ?>" class="ui basic blue button updateAmount">
-                                                    <i class="write icon"></i>
-                                                </a>
-                                            </div>
+                                            <?= $amount ?>
                                         </td>
                                         <td>
                                             <a class="ui icon basic orange button" href="<?= site_url("cart/removeItem/{$id}") ?>">
@@ -141,19 +136,5 @@
         } else {
             return true;
         }
-    });
-    $(function () {
-        $(".updateAmount").click(function () {
-            var amount = $(this).parent().find("input").val();
-            var href = $(this).attr("href");
-            var max = $(this).parent().find("input").attr("max");
-
-            if (amount > max) {
-                href += "/" + max;
-            } else {
-                href += "/" + amount;
-            }
-            $(this).attr("href", href);
-        });
     });
 </script>

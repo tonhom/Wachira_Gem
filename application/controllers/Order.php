@@ -15,6 +15,7 @@ class Order extends MY_Controller {
             $data = new \stdClass();
             $data->error = TRUE;
         }else{
+            $data->order_total_price = number_format($data->order_total_price, 2);
             $data->items = $this->OrderModel->GetOrderDetailList($data->order_id);
         }
         echo json_encode($data);

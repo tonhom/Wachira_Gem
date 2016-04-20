@@ -7,10 +7,25 @@ if (!isset($dataEdit)) {
 }
 ?>
 <div class="ui container" style="margin-top: 58px;">
+    <?php
+    if ($this->session->flashdata("success") != "") {
+        $message = $this->session->flashdata("success");
+        ?>
+        <div class="ui positive icon message">
+            <i class="close icon"></i>
+            <i class="check circle icon"></i>
+            <div class="content">
+                <div class="ui header">ดำเนินการสำเร็จ</div>
+                <p><?= $message ?></p>
+            </div>
+        </div>
+        <?php
+    }
+    ?>
     <form class="ui form" action="<?= site_url("staff/category/save") ?>" method="post">
         <input type="hidden" name="category_id" value="<?= getValDefault($dataEdit, "category_id") ?>" />
         <div class="ui segments">
-            <div class="ui <?=$isEdit? "green inverted" : ""?> segment">
+            <div class="ui <?= $isEdit ? "green inverted" : "" ?> segment">
                 <?php
                 if ($isEdit) {
                     ?>
@@ -78,3 +93,17 @@ if (!isset($dataEdit)) {
         </tbody>
     </table>
 </div>
+
+
+<script>
+    $(function () {
+        $('.message .close')
+                .on('click', function () {
+                    $(this)
+                            .closest('.message')
+                            .transition('fade')
+                            ;
+                })
+                ;
+    });
+</script>

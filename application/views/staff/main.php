@@ -23,7 +23,7 @@
                             <td><?= $item->order_number ?></td>
                             <td><?= $memberInfo->member_full_name ?></td>
                             <td><?= $DateTime->ToThaiDate($item->order_date_order, TRUE) ?></td>
-                            <td><?= number_format($item->order_total_price) ?></td>
+                            <td><?= number_format($item->order_total_price, 2) ?></td>
                             <td>
                                 <a class="ui button" href="<?= site_url("staff/order/detail/{$item->order_id}") ?>">
                                     More
@@ -74,7 +74,7 @@
                             <td><?= $orderDetail->order_number ?></td>
                             <td><?= $memberInfo->member_full_name ?></td>
                             <td><?= $item->payment_bank ?> <?= !empty($item->payment_branch) ? "สาขา" . $item->payment_branch : "" ?></td>
-                            <td><?= number_format($item->payment_amount) ?></td>
+                            <td><?= number_format($item->payment_amount, 2) ?></td>
                             <td><?= $DateTime->ToThaiDate($item->payment_date_transfer) ?> <?= !empty($item->payment_time_transfer) ? $item->payment_time_transfer : "" ?></td>
                             <td>
                                 <?php

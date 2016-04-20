@@ -1,7 +1,7 @@
 <?php
 
 class OrderModel extends CI_Model {
-    
+
     public function GetPaidOrder() {
         $this->db->join("member", "member.member_id = order.member_id");
         $this->db->where("order.order_status", "รอการจัดส่ง");
@@ -34,7 +34,7 @@ class OrderModel extends CI_Model {
         }
         return $maxRow->order_id;
     }
-    
+
     public function GetDetail($order_id) {
         $this->db->where("order_id", $order_id);
         $query = $this->db->get("order");
@@ -56,7 +56,7 @@ class OrderModel extends CI_Model {
             return FALSE;
         }
     }
-    
+
     public function SearchByOrderNumber($order_number) {
         $this->db->join("member", "member.member_id = order.member_id");
         //$this->db->where("order.order_status", "รอการจัดส่ง");
@@ -76,7 +76,11 @@ class OrderModel extends CI_Model {
         $this->db->join("product", "product.product_id = order_detail.product_id");
         $this->db->where("order_detail.order_id", $id);
         $query = $this->db->get();
-        return $query->result();
+        $data = $query->result();
+        foreach ($data as $item) {
+            $item->total_price = number_format($item->product_price * $item->order_detail_amount);
+        }
+        return $data;
     }
 
     public function GetMyOrder($member_id) {
@@ -88,18 +92,18 @@ class OrderModel extends CI_Model {
             return [];
         }
     }
-    
-    public function Paid($order_number){
+
+    public function Paid($order_number) {
         $this->db->where("order_number", $order_number);
-        $this->db->update("order", ["order_status"=> "รอการจัดส่ง"]);
+        $this->db->update("order", ["order_status" => "รอการจัดส่ง"]);
     }
-    
-    public function Shiped($order_id){
+
+    public function Shiped($order_id) {
         $this->db->where("order_id", $order_id);
-        $this->db->update("order", ["order_status"=> "จัดส่งแล้ว"]);
+        $this->db->update("order", ["order_status" => "จัดส่งแล้ว"]);
     }
-    
-    public function GetShiped(){
+
+    public function GetShiped() {
         $this->db->join("member", "member.member_id = order.member_id");
         $this->db->where("order.order_status", "จัดส่งแล้ว");
         $this->db->order_by("order.order_id", "DESC");
