@@ -10,6 +10,10 @@ class Main extends MY_Controller {
     }
 
     public function index() {
+        // restock automatic before loading
+        $this->load->model("ProductModel");
+        $this->ProductModel->Restock();
+        
         $this->load->model("OrderModel");
         $data["lastOrder"] = $this->OrderModel->GetLastOrder();
         

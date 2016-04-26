@@ -1,23 +1,7 @@
 <div class="ui container padded1em-top">
     <div class="ui grid">
         <div class="row">
-            <div class="four wide column">
-                <div class="ui stacked segment" style="min-height: 300px;">
-                    <h3 class="ui header">หมวดรายการสินค้า</h3>
-                    <div class="ui middle aligned divided relaxed list">
-                        <?php
-                        foreach ($category as $item) {
-                            ?>
-                            <div class="item">
-                                <a href="<?= site_url("product/category/{$item->category_id}") ?>" class="header"><?= $item->category_name ?></a>
-                            </div>
-                            <?php
-                        }
-                        ?>
-                    </div>
-                </div>
-            </div>
-            <div class="eight wide column">
+            <div class="eleven wide column">
                 <?php
                 if (!empty($bestSeller)) {
                     //print_r($bestSeller);
@@ -71,7 +55,7 @@
                     </div>
                 </div>
             </div>
-            <div class="four wide column">
+            <div class="five wide column">
                 <div class="ui segment">
                     <form class="ui form" method="post" action="<?= site_url("product/search") ?>">
                         <div class="field">

@@ -3,8 +3,6 @@
 class Cart extends MY_Controller {
 
     public function items() {
-        $this->load->model("CategoryModel");
-        $data["category"] = $this->CategoryModel->getAll();
 
         $this->load->model("ProductModel");
         $data["instantProduct"] = $this->ProductModel;
@@ -59,7 +57,6 @@ class Cart extends MY_Controller {
             $this->load->model("OrderModel");
             $this->load->model("ProductModel");
             $dataOrder = [
-                "order_number" => $this->generateOrderNumber(),
                 "member_id" => $this->session->userdata("user")->member_id,
                 "order_date_order" => date("Y-m-d H:i:s"),
                 "order_total_price" => $this->calculateTotalPrice()

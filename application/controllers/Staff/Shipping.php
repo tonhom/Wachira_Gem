@@ -14,12 +14,12 @@ class Shipping extends MY_Controller {
         $data["DateTime"] = $this->DateTimeModel;
         
         $this->load->model("OrderModel");
-        if ($this->input->get("order_number") != "") {
-            $data["shipping"] = $this->OrderModel->SearchByOrderNumber($this->input->get("order_number"));
+        if ($this->input->get("order_id") != "") {
+            $data["shipping"] = $this->OrderModel->Search($this->input->get("order_id"));
         } else {
             $data["shipping"] = $this->OrderModel->GetShiped();
         }
-        $data["order_number"] = $this->input->get("order_number");
+        $data["order_id"] = $this->input->get("order_id");
         $viewData = $this->loadView("staff/shipping", $data);
         $this->render($viewData);
     }

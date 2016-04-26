@@ -7,6 +7,10 @@ class DateTimeModel extends CI_Model {
     }
 
     public function ToThaiDate($raw, $withTime = false, $timeNewLine = FALSE) {
+        if(empty($raw)){
+            return "";
+        }
+        
         $temp = explode(" ", $raw);
         $temp2 = explode("-", $temp[0]);
         $month = array(

@@ -9,9 +9,9 @@ class Order extends MY_Controller {
     }
 
     public function GetDetail() {
-        $order_number = $this->input->post("order_number");
+        $order_id = $this->input->post("order_id");
         $this->load->model("OrderModel");
-        $data = $this->OrderModel->GetDetailByOrderNumber($order_number);
+        $data = $this->OrderModel->GetDetail($order_id);
         if($data === FALSE){
             $data = new \stdClass();
             $data->error = TRUE;

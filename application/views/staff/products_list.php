@@ -22,7 +22,7 @@
             <form class="ui form" action="<?= site_url("staff/product/collection/{$filter["currentPage"]}") ?>" method="get">
                 <div class="ui fluid icon input">
                     <i class="search icon"></i>
-                    <input type="text" placeholder="ค้นหา..." name="q" />
+                    <input type="text" placeholder="ค้นหา..." name="q" value="<?=$filter["q"]?>" />
                 </div>
             </form>
         </div>

@@ -17,3 +17,17 @@ function getValDefault($data, $key, $default = "") {
         return $default;
     }
 }
+
+function order_status($code) {
+    if ($code == 1) {
+        return "รอการชำระเงิน";
+    } else if ($code == 2) {
+        return "รอการจัดส่ง";
+    } else if ($code == 3) {
+        return "จัดส่งแล้ว";
+    } else if ($code == 4) {
+        return "ไม่ชำระเงินภายใน 7 วัน";
+    } else {
+        return $code;
+    }
+}

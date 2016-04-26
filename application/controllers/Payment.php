@@ -2,24 +2,24 @@
 
 class Payment extends MY_Controller {
 
-    public function confirm($order_number = "") {
+    public function confirm($order_id = "") {
         $this->load->model("DateTimeModel");
         $data["months"] = $this->DateTimeModel->getMonthTh();
 
-        $this->load->model("CategoryModel");
-        $data["category"] = $this->CategoryModel->getAll();
-
-        $data["order_number"] = $order_number;
+        $data["order_id"] = $order_id;
+        if(!empty($order_id)){
+            $this->load->model("OrderModel");
+            $data["order_detail"] = $this->OrderModel->GetDetail($order_id);
+            $data["order_list"] = $this->OrderModel->GetOrderDetailList($data["order_detail"]->order_id);
+        }
 
         $this->setNavbar("", ["current" => "confirm_payment"]);
         $this->render($this->loadView("payment/confirm_payment", $data));
     }
 
     public function instruction() {
-        $this->load->model("CategoryModel");
-        $data["category"] = $this->CategoryModel->getAll();
         $this->setNavbar("", ["current" => "payment_instruction"]);
-        $this->render($this->loadView("payment/instruction", $data));
+        $this->render($this->loadView("payment/instruction"));
     }
 
     public function save() {
@@ -62,7 +62,7 @@ class Payment extends MY_Controller {
             }
 
             if (isset($model["payment_evidence"])) {
-                $model["order_number"] = $data["order_number"];
+                $model["order_id"] = $data["order_id"];
                 $model["member_id"] = $this->session->userdata("user")->member_id;
                 $model["payment_bank"] = $data["payment_bank"];
                 $model["payment_branch"] = $data["payment_branch"];
@@ -76,7 +76,7 @@ class Payment extends MY_Controller {
                 $this->db->trans_begin();
                 $this->PaymentModel->Insert($model);
                 // update payment status
-                $this->OrderModel->Paid($data["order_number"]);
+                $this->OrderModel->Paid($data["order_id"]);
                 if ($this->db->trans_status() === FALSE) {
                     $this->session->set_flashdata("save_error", true);
                     $this->db->trans_rollback();

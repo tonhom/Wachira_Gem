@@ -1,12 +1,12 @@
 <?php
-$payment = $IPayment->GetPayment($order->order_number);
+$payment = $IPayment->GetPayment($order->order_id);
 $member = $IMember->GetMemberInfo($order->member_id);
 ?>
 <div class="ui container" style="margin-top: 58px;">
     <div class="ui segments" style="min-height: 500px;">
         <div class="ui segment">
             <h3 class="ui header">
-                เลขที่ใบสั่งซื้อ : <?= $order->order_number ?>
+                เลขที่ใบสั่งซื้อ : <?= $order->order_id ?>
             </h3>
         </div>
         <div class="ui horizontal segments" style="background-color: #fff;">
@@ -22,7 +22,7 @@ $member = $IMember->GetMemberInfo($order->member_id);
             </div>
         </div>
         <?php
-        if ($order->order_status != "รอการชำระเงิน") {
+        if ($order->order_status != 1 && $order->order_status != 4) {
             ?>
             <div class="ui segment">
                 <h4 class="ui header">รายละเอียดการชำระเงิน</h4>
@@ -78,7 +78,7 @@ $member = $IMember->GetMemberInfo($order->member_id);
             <div class="ui segment">
                 <div class="ui tiny statistic">
                     <div class="label">
-                        ราคารวมทั้งหมด
+                        ราคารวมภาษีมูลค่าเพิ่ม
                     </div>
                     <div class="value">
                         <?= number_format($order->order_total_price, 2) ?>
@@ -86,12 +86,12 @@ $member = $IMember->GetMemberInfo($order->member_id);
                 </div>
             </div>
             <div class="ui segment">
-                <div class="ui <?= $order->order_status == "รอการชำระเงิน" ? "orange" : "" ?> <?= $order->order_status == "จัดส่งแล้ว" ? "green" : "" ?> tiny statistic">
+                <div class="ui <?= $order->order_status == 1 ? "orange" : "" ?> <?= $order->order_status == 3 ? "green" : "" ?> <?= $order->order_status == 4 ? "red" : "" ?> tiny statistic">
                     <div class="label">
                         สถานะ
                     </div>
                     <div class="value">
-                        <?= $order->order_status ?>
+                        <?= order_status($order->order_status) ?>
                     </div>
                 </div>
             </div>
@@ -111,7 +111,9 @@ $member = $IMember->GetMemberInfo($order->member_id);
                 </thead>
                 <tbody>
                     <?php
+                    $totalAll = 0;
                     foreach ($detail as $row) {
+                        $totalAll += $row->product_price * $row->order_detail_amount;
                         ?>
                         <tr>
                             <td><?= $row->product_name ?></td>
@@ -122,16 +124,28 @@ $member = $IMember->GetMemberInfo($order->member_id);
                         <?php
                     }
                     ?>
+                    <tr class="positive">
+                        <td colspan="3" style='text-align: right;'>
+                            <h4 class="ui header">ราคารวมสุทธิ</h4>
+                        </td>
+                        <td><strong><?= number_format($totalAll, 2) ?></strong></td>
+                    </tr>
+                    <tr class="positive">
+                        <td colspan="3" style='text-align: right;'>
+                            <h4 class="ui header">ภาษี</h4>
+                        </td>
+                        <td><strong><?= number_format($totalAll * 0.07, 2) ?></strong></td>
+                    </tr>
                 </tbody>
             </table>
         </div>
         <div class="ui segment">
-            <a class="ui button" href="<?= site_url("staff/shipping?order_number={$order->order_number}") ?>">
+            <a class="ui button" href="<?= site_url("staff/shipping?order_id={$order->order_id}") ?>">
                 <i class="arrow left icon"></i>
                 กลับ
             </a>
             <?php
-            if ($order->order_status == "รอการจัดส่ง") {
+            if ($order->order_status == 2) {
                 ?>
                 <a class="ui labeled icon primary button" onclick="return confirm('ยืนยันแจ้งการจัดส่ง')" href="<?= site_url("staff/shipping/shiped/{$order->order_id}") ?>">
                     <i class="check circle icon"></i> แจ้งการจัดส่ง

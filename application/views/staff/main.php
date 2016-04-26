@@ -20,7 +20,7 @@
                         $memberInfo = $instantMember->GetMemberInfo($item->member_id);
                         ?>
                         <tr>
-                            <td><?= $item->order_number ?></td>
+                            <td><?= $item->order_id ?></td>
                             <td><?= $memberInfo->member_full_name ?></td>
                             <td><?= $DateTime->ToThaiDate($item->order_date_order, TRUE) ?></td>
                             <td><?= number_format($item->order_total_price, 2) ?></td>
@@ -68,10 +68,10 @@
                     <?php
                     foreach ($lastPayment as $item) {
                         $memberInfo = $instantMember->GetMemberInfo($item->member_id);
-                        $orderDetail = $IOrder->GetDetailByOrderNumber($item->order_number);
+                        $orderDetail = $IOrder->GetDetail($item->order_id);
                         ?>
                         <tr>
-                            <td><?= $orderDetail->order_number ?></td>
+                            <td><?= $orderDetail->order_id ?></td>
                             <td><?= $memberInfo->member_full_name ?></td>
                             <td><?= $item->payment_bank ?> <?= !empty($item->payment_branch) ? "สาขา" . $item->payment_branch : "" ?></td>
                             <td><?= number_format($item->payment_amount, 2) ?></td>

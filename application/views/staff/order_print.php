@@ -13,7 +13,7 @@
         <div class="ui segments">
             <div class="ui segment">
                 <h3 class="ui header">
-                    เลขที่ใบสั่งซื้อ : <?= $order->order_number ?>
+                    เลขที่ใบสั่งซื้อ : <?= $order->order_id ?>
                 </h3>
             </div>
             <div class="ui horizontal segments" style="background-color: #fff;">
@@ -42,7 +42,7 @@
                 <div class="ui segment">
                     <div class="ui tiny statistic">
                         <div class="label">
-                            ราคารวมทั้งหมด
+                            ราคารวมภาษีมูลค่าเพิ่ม
                         </div>
                         <div class="value">
                             <?= number_format($order->order_total_price, 2) ?>
@@ -50,12 +50,12 @@
                     </div>
                 </div>
                 <div class="ui segment">
-                    <div class="ui <?= $order->order_status == "รอการชำระเงิน" ? "orange" : "" ?> tiny statistic">
+                    <div class="ui <?= $order->order_status == 1 ? "orange" : "" ?> tiny statistic">
                         <div class="label">
                             สถานะ
                         </div>
                         <div class="value">
-                            <?= $order->order_status ?>
+                            <?= order_status($order->order_status) ?>
                         </div>
                     </div>
                 </div>
@@ -75,7 +75,9 @@
                     </thead>
                     <tbody>
                         <?php
+                        $totalAll = 0;
                         foreach ($detail as $row) {
+                            $totalAll += $row->product_price * $row->order_detail_amount;
                             ?>
                             <tr>
                                 <td><?= $row->product_name ?></td>
@@ -86,6 +88,18 @@
                             <?php
                         }
                         ?>
+                        <tr class="positive">
+                            <td colspan="3" style='text-align: right;'>
+                                <h4 class="ui header">ราคารวมสุทธิ</h4>
+                            </td>
+                            <td><strong><?= number_format($totalAll, 2) ?></strong></td>
+                        </tr>
+                        <tr class="positive">
+                            <td colspan="3" style='text-align: right;'>
+                                <h4 class="ui header">ภาษี</h4>
+                            </td>
+                            <td><strong><?= number_format($totalAll * 0.07, 2) ?></strong></td>
+                        </tr>
                     </tbody>
                 </table>
             </div>

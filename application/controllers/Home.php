@@ -2,8 +2,6 @@
 
 class Home extends MY_Controller{
     public function index(){
-        $this->load->model("CategoryModel");
-        $data["category"] = $this->CategoryModel->getAll();
         
         $this->load->model("ProductModel");
         $data["bestSeller"] = $this->ProductModel->GetBestSeller();

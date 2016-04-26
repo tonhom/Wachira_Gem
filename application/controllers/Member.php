@@ -66,8 +66,6 @@ class Member extends MY_Controller {
     }
 
     public function signup() {
-        $this->load->model("CategoryModel");
-        $data["category"] = $this->CategoryModel->getAll();
 
         $this->setNavbar("", ["current" => "signup"]);
         $this->load->model("DateTimeModel");

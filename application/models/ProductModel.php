@@ -2,6 +2,38 @@
 
 class ProductModel extends CI_Model {
 
+    public function Restock() {
+        $sql = "SELECT * FROM `order` where DATE_ADD(order_date_order, interval 7 day) <= NOW() AND order_status = 1;";
+        $query = $this->db->query($sql);
+        $this->db->trans_begin();
+        foreach ($query->result() as $row) {
+            $this->db->where("order_id", $row->order_id);
+            $details_query = $this->db->get("order_detail");
+            $details = $details_query->result();
+            foreach ($details as $order_detail) {
+                // get first 
+                $this->db->where("product_id", $order_detail->product_id);
+                $product = $this->db->get("product");
+                $product = $product->row();
+
+                // then update product
+                $this->db->where("product_id", $order_detail->product_id);
+                $this->db->update("product", ["product_stock" => $product->product_stock + $order_detail->order_detail_amount]);
+            }
+            // update order_status
+            $this->db->where("order_id", $row->order_id);
+            $this->db->update("order", ["order_status" => 4]);
+        }
+
+        if ($this->db->trans_status() === FALSE) {
+            $this->db->trans_rollback();
+            return FALSE;
+        } else {
+            $this->db->trans_commit();
+            return TRUE;
+        }
+    }
+
     public function Reserve($id, $amount) {
         $data = $this->GetById($id);
         $this->db->where("product_id", $id);
@@ -94,8 +126,8 @@ class ProductModel extends CI_Model {
             return $query->result();
         }
     }
-    
-    public function InUse($id){
+
+    public function InUse($id) {
         $this->db->where("product_id", $id);
         $query = $this->db->count_all_results("order_detail");
         return $query;

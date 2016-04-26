@@ -17,8 +17,14 @@ class Product extends MY_Controller {
         $filter = $this->input->get();
         $filter["currentPage"] = $page;
         $this->load->model("ProductModel");
+        if(isset($filter["q"])){
+            $data["products"] = $this->ProductModel->Search($filter["q"]);
+        }else{
+            $filter["q"] = "";
+            $data["products"] = $this->ProductModel->GetByLimit($page, 32);
+        }
         $data["filter"] = $filter;
-        $data["products"] = $this->ProductModel->GetByLimit($page, 15);
+        
         $data["IProduct"] = $this->ProductModel;
         $viewData = $this->loadView("staff/products_list", $data);
         $this->render($viewData);

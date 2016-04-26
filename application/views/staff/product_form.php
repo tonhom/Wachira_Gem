@@ -63,7 +63,7 @@ if (!isset($info)) {
                 </div>
                 <div class=" inline field">
                     <label>จำนวนสินค้าใน Stock</label>
-                    <input type="number" name="product_stock" min="1" value="<?= getValDefault($info, "product_stock") == "" ? "1" : getValDefault($info, "product_stock") ?>" />
+                    <input type="number" name="product_stock" min="0" value="<?= getValDefault($info, "product_stock") == "" ? "0" : getValDefault($info, "product_stock") ?>" />
                 </div>
                 <button type="submit" class="ui primary button">บันทึกข้อมูล</button>
             </form>
